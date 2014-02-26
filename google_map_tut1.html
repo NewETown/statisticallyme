@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Heatmap Test</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      div {text-align: center;}
+      #map-canvas { height: 70%; }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEwAlTq4PEFWq0H59t25BbSFgXrCmyJRU&libraries=visualization&sensor=true">
+    </script>
+    <script>
+      var geocoder = new google.maps.Geocoder(), map, _center, heatmap, _heatmapData = [];
+
+      // geocoder.geocode({'address': 'Seattle, WA'}, function(results, status) {
+      //   if(status == google.maps.GeocoderStatus.OK) {
+      //     _center = results[0].geometry.location;
+      //     // populateHeatmapData();
+      //     initialize();
+      //   }  else {
+      //     console.log("Geocode was not successful for the following reason: " + status);
+      //   }
+      // });
+
+      function getUserLoc() {
+
+        if (navigator.geolocation)
+          navigator.geolocation.getCurrentPosition(showPosition);
+        else
+          console.log("Geolocation is not supported by this browser.");
+      }
+
+      function showPosition(position) {
+        console.log("Lat, lng " + position.coords.latitude + ", " + position.coords.longitude);
+        var thestring = position.coords.latitude + ", " + position.coords.longitude;
+        var bits = thestring.split(/,\s*/);
+        _center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        _heatmapData.push(_center);
+        initialize();
+      }
+
+      // Generate random heatmap around Seattle
+      function populateHeatmapData() {
+        var _initLat = _center.d,
+            _initLng = _center.e,
+            _mult = -1;
+        for(i = 0; i < 300; i++) {
+          _modifier = Math.random() * .099999;
+
+          if(_mult == -1)
+            _mult = 1;
+          else
+            _mult = -1;
+
+          _val = _mult * _modifier;
+
+          _heatmapData.push(new google.maps.LatLng(_initLat + _val, _initLng + _val));
+        }
+      }
+
+      function initialize() {
+        var mapOptions = {
+          center: _center,
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+
+        var pointArray = new google.maps.MVCArray(_heatmapData);
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: pointArray
+        });
+
+        heatmap.setMap(map);
+
+      }
+
+      getUserLoc();
+
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1>Some Cool Map Stuff</h1>
+    </div>
+    <div id="map-canvas"/>
+  </body>
+</html>

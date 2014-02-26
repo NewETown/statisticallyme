@@ -1,0 +1,107 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Istok Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #161617;
+}
+
+h1, h2, h3, h4, h5 {
+  text-transform: uppercase;
+  font-family: "Istok Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.main-row {
+  min-height: 250px;
+}
+
+.row-dark {
+  background-color: #091e10;
+  color: #efefef;
+}
+
+/*
+ * Masthead for nav
+ */
+
+.blog-masthead {
+  position: absolute;
+  background-color: rgba(214,214,214, .4);
+  border-bottom: 1px solid rgb(71,71,71);
+  z-index: 50;
+  width: 100%;
+}
+
+/* Nav links */
+.blog-nav-item {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: #fff;
+}
+.blog-nav-item:hover,
+.blog-nav-item:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Active state gets a caret at the bottom */
+.blog-nav .active {
+  color: #fff;
+}
+.blog-nav .active:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -5px;
+  vertical-align: middle;
+  content: " ";
+  border-right:  5px solid transparent;
+  border-bottom: 5px solid;
+  border-left:   5px solid transparent;
+}
+
+.hero {
+  height: 1030px;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;  /* align the inline(-block) elements horizontally */
+  font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.hero:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;  /* vertical alignment of the inline element */
+  height: 100%;
+}
+
+.social-container {
+  width: 225px;
+  margin: auto;
+  padding-bottom: 30px;
+}
+
+.social-icon {
+  position: relative;
+  display: inline-block;
+  max-width: 110px;
+  /*padding-top: 60px;*/
+}
+
+@media(max-height: 1200px) {
+
+  .hero-img {
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    width: 100%;
+    max-height: 1100px;
+  }
+}
