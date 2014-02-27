@@ -68,6 +68,9 @@ function getFooter() {
   	echo("\t\tga('create', 'UA-42403118-7', 'statistically.me');");
   	echo("\t\tga('send', 'pageview');");
 	echo("\t</script>");
+
+	echo("\t</body>");
+	echo("</html>");
 }
 
 ?>

@@ -2,7 +2,6 @@
 
 require_once 'dbconfig.php';
 require_once 'settings.php';
-require_once 'src/facebook.php';
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -10,120 +9,48 @@ try {
 	die("Could not connect to the database $dbname: " . $pe->getMessage());
 }
 
-$facebook = new Facebook(array(
-  'appId'  => '407908079353620',
-  'secret' => $app_secret,
-  'fileUpload' => false, // optional
-  'allowSignedRequest' => false, // optional, but should be set to false for non-canvas apps
-));
-
-// See if there is a user from a cookie
-// $user = $facebook->getUser();
-
-// if ($user) {
-//   try {
-//     // Proceed knowing you have a logged in user who's authenticated.
-//     $user_profile = $facebook->api('/me');
-//     $logoutUrl = $facebook->getLogoutUrl();
-//   } catch (FacebookApiException $e) {
-//     $user = null;
-//   }
-// } else {
-//     $loginUrl = $facebook->getLoginUrl();
-// }
-
-getHeader();
+	echo("<!DOCTYPE html>\n");
+	echo("<html lang=\"en\" style=\"height:100%;\">\n");
+	echo("<head>\n");
+	echo("<meta charset=\"utf-8\">\n");
+    echo("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n");
+    echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
+	echo("<title>Statistically.Me</title>\n");
+	echo("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.css\">\n");
+	echo("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/custom.css\">\n");
+	echo("<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic' rel='stylesheet' type='text/css'>\n");
+	echo("<script src=\"http://code.jquery.com/jquery-latest.min.js\"></script>\n");
+	echo("</head>\n");
+	echo("<body style=\"height:100%;\">\n");
+	echo("\t<div class=\"wrap\">");
+	echo("\t\t<div id=\"fb-root\"></div>\n");
+	echo("\t\t<div class=\"blog-masthead\">\n");
+	echo("\t\t\t<div class=\"container\">\n");
+	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item active\" href=\"#\">STATISTICALLY.ME</a>\n");
+	// echo("\t\t\t\t<a class=\"blog-nav-item active\" href=\"#\">Home</a>\n");
+	// echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"#\">About</a>\n");
+	// echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"#\">Press</a>\n");
+	// echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"#\">New hires</a>\n");
+	// echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"#\">About</a>\n");
+	// echo("\t\t\t\t\t<span class=\"blog-nav-item\">STATISTICALLY.ME</span>\n");
+	// echo("\t\t\t\t\t<a id=\"login\" class=\"blog-nav-item pull-right\" href=\"#\">Log In</a>\n");
+	// echo("\t\t\t\t\t<a id=\"register\" class=\"blog-nav-item pull-right\" href=\"#\">Register</a>\n");
+	// echo("\t\t\t\t\t<a id=\"logout\" href=\"#\" class=\"blog-nav-item pull-right\"></a>\n");
+	echo("\t\t\t\t</nav>\n");
+	echo("\t\t\t</div>\n");
+	echo("\t\t</div>\n");
 
 ?>
 
 <div class="hero">
-	<img src="http://placehold.it/2800x2600/467148/000000&text=STATISTICALLY.ME" class="hero-img">
+	<h1 class="greeting">Statistically.Me</h1>
+	<!-- <img src="http://placehold.it/2800x2600/467148/000000&text=." class="hero-img"> -->
 </div>
-
-<div class="row main-row">
-	<h2 class="text-center">Use us to discover you</h2>
-	<div class="col-md-offset-1 col-md-10">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vestibulum aliquet massa, sed elementum odio adipiscing vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla nec accumsan urna, in volutpat risus. Nam vestibulum, nunc ut malesuada aliquam, tellus velit lobortis lorem, id tempus lectus libero ut risus. Vivamus vitae ligula tortor. Vivamus non lacus est. Donec sit amet magna ut metus aliquam vestibulum vitae ut diam. Sed vitae pharetra est. In et mi nec arcu lacinia commodo. Nunc viverra eros sed risus consequat lacinia. Vivamus sed enim et neque molestie vehicula a sollicitudin neque.</p>
-		<img src="http://placehold.it/400x150" class="img-responsive" style="margin:auto; padding-bottom:20px;">
-	</div>
-</div>
-
-<div class="row row-dark main-row">
-	<h2 class="text-center">Enjoy. Participate. Learn.</h2>
-	<div class="col-md-offset-1 col-md-10" style="padding-bottom:20px;">
-		<img src="http://placehold.it/500x400&text=Enjoy" class="img-responsive" style="display:inline-block;">
-		<img src="http://placehold.it/500x400&text=Participate" class="img-responsive" style="display:inline-block;">
-		<img src="http://placehold.it/500x400&text=Learn" class="img-responsive" style="display:inline-block;">
-	</div>
-</div>
-
-<div class="row main-row">
-	<h2 class="text-center">How and Why</h2>
-	<div class="col-md-offset-1 col-md-10" style="padding-bottom:20px;">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vestibulum aliquet massa, sed elementum odio adipiscing vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla nec accumsan urna, in volutpat risus. Nam vestibulum, nunc ut malesuada aliquam, tellus velit lobortis lorem, id tempus lectus libero ut risus. Vivamus vitae ligula tortor. Vivamus non lacus est. Donec sit amet magna ut metus aliquam vestibulum vitae ut diam. Sed vitae pharetra est. In et mi nec arcu lacinia commodo. Nunc viverra eros sed risus consequat lacinia. Vivamus sed enim et neque molestie vehicula a sollicitudin neque.</p>
-	</div>
-</div>
-
-<!-- <div class="row">
-	<h1>Register</h1>
-	<form action="register.php" role="form" method="post">
-		<div class="form-group">
-			<div class="row">
-				<div class="col-md-4">
-					<label for="f_name">First Name:</label>
-					<input type="text" class="form-control" name="first_name" placeholder="Please enter your first name">
-				</div>
-				<div class="col-md-4">
-					<label for="l_name">Last Name:</label>
-					<input type="text" class="form-control" name="last_name" placeholder="Please enter your last name">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<label for="password">Password:</label>
-					<input type="password" class="form-control" name="password" placeholder="Please enter a password">
-				</div>
-				<div class="col-md-4">
-					<label for="email">Email:</label>
-					<input type="text" class="form-control" name="email" placeholder="Please enter an email">
-				</div>
-			</div>
-		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
-	</form>
-</div>
-
-<div class="row">
-	<h1>Login</h1>
-	<form action="main.php" role="form" method="post" class="form-inline">
-		<div class="form-group">
-			<input type="text" class="form-control" name="username" placeholder="Username">
-		</div>
-		<div class="form-group">
-			<input type="password" class="form-control" name="password" placeholder="Password">
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-default">Login</button>
-		</div>
-	</form>
-</div> -->
-
-<!-- <div class="row">
-	<div id="loginArea">
-		<h1>Or Use Facebook</h1>
-		<button id="fbLogin" class="btn">Facebook Login</button>
-	</div>
-	<div id="likesArea">
-		<h1>Get Likes</h1>
-		<button id="getLikes" class="btn">Get likes</button>
-	</div>
-</div>  -->
 
 
 <?php
-
-getFooterJS();
-
+	echo("\t\t</div> <!-- end wrap -->\n");
 ?>
 
 <script>
@@ -298,7 +225,35 @@ function testAPI() {
 </script>
 
 <?php
+	echo("\t<!-- Social footer -->\n");
+	echo("\t<footer style=\"position:relative; margin-top:-90px; height:90px; clear:both;\">");
+	echo("\t\t<div class=\"row row-dark\">");
+	echo("\t\t\t<div class=\"col-md-offset-1 col-md-10 text-center\" style=\"min-height: 90px;\">");
+	//echo("\t\t\t<h5 class=\"text-center\">Stay in touch</h5>");
+	//echo("\t\t\t<div class=\"social-container\">");
+	echo("\t\t\t<div class=\"pull-left\" style=\"padding-top: 25px; padding-bottom:25px;\">");
+	echo("\t\t\t\t<a href=\"https://www.facebook.com/pages/StatisticallyMe/1470796433142543\" ><img src=\"img/fb_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
+	echo("\t\t\t\t<a href=\"https://twitter.com/ThatCodeDude\"><img src=\"img/tw_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
+	echo("\t\t\t</div>");
+	//echo("\t\t\t\t<img src=\"img/li_square.svg\" class=\"img-responsive social-icon\">");
+	//echo("\t\t\t</div>");
+	echo("\t\t\t<div class=\"text-center\" style=\"padding-top: 10px; margin:auto; width: 50%; display: inline-block;\">");
+	echo("\t\t\t\t<a href=\"#\"><h3 style=\"display:inline-block;\">Home</h3></a>•");
+	echo("\t\t\t\t<a href=\"#\"><h3 style=\"display:inline-block;\">About</h3></a>");
+	echo("\t\t\t</div>");
+	echo("\t\t</div>");
+	echo("\t</footer>");
 
-getFooter();
+	echo("\t<script>");
+  	echo("\t\t(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){");
+  	echo("\t\t(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),");
+  	echo("\t\tm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)");
+  	echo("\t\t})(window,document,'script','//www.google-analytics.com/analytics.js','ga');");
+  	echo("\t\tga('create', 'UA-42403118-7', 'statistically.me');");
+  	echo("\t\tga('send', 'pageview');");
+	echo("\t</script>");
+
+	echo("\t</body>");
+	echo("</html>");
 
 ?>

@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Active state gets a caret at the bottom */
-.blog-nav .active {
+/*.blog-nav .active {
   color: #fff;
 }
 .blog-nav .active:after {
@@ -66,14 +66,17 @@ h1, h2, h3, h4, h5 {
   border-right:  5px solid transparent;
   border-bottom: 5px solid;
   border-left:   5px solid transparent;
-}
+}*/
 
 .hero {
-  height: 1030px;
-  overflow: hidden;
+  /*background-image: url(http://placehold.it/2800x2600/467148/000000&text=.);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;*/
+  height: 100%;
   width: 100%;
   text-align: center;  /* align the inline(-block) elements horizontally */
-  font: 0/0 a;         /* remove the gap between inline(-block) elements */
+  /*font: 0/0 a;         *//* remove the gap between inline(-block) elements */
 }
 
 .hero:before {
@@ -94,6 +97,17 @@ h1, h2, h3, h4, h5 {
   display: inline-block;
   max-width: 110px;
   /*padding-top: 60px;*/
+}
+
+.greeting {
+  margin-top: 20%;
+}
+
+.wrap {
+  background-image: url(http://placehold.it/2800x2600/467148/000000&text=.);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
 }
 
 @media(max-height: 1200px) {
