@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class="text-center" style="margin-top:20%;">
-    <h5>Learn about yourself</h5>
+    <h5>Learn about you</h5>
     <h1>Coming Soon</h1>
   </div>
   <?php
