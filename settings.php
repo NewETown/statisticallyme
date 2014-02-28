@@ -40,20 +40,52 @@ function getHeader() {
 	echo("<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic' rel='stylesheet' type='text/css'>\n");
 	echo("<script src=\"http://code.jquery.com/jquery-latest.min.js\"></script>\n");
 	echo("</head>\n");
+}
+
+function getMapHeader() {
+	echo("<!DOCTYPE html>\n");
+	echo("<html lang=\"en\" style=\"height:100%;\">\n");
+	echo("<head>\n");
+	echo("<meta charset=\"utf-8\">\n");
+    echo("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n");
+    echo("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
+	echo("<title>Statistically.Me</title>\n");
+	echo("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.css\">\n");
+	echo("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/custom.css\">\n");
+	echo("<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic' rel='stylesheet' type='text/css'>\n");
+	echo("<script src=\"http://code.jquery.com/jquery-latest.min.js\"></script>\n");
+	echo("<script type=\"text/javascript\" src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyAEwAlTq4PEFWq0H59t25BbSFgXrCmyJRU&libraries=visualization&sensor=true\"></script>");
+	echo("</head>\n");
+}
+
+function getFixedIndexPage() {
 	echo("<body style=\"height:100%;\">\n");
 	echo("\t<div class=\"wrap\">");
 	echo("\t\t<div id=\"fb-root\"></div>\n");
 	echo("\t\t<div class=\"blog-masthead\">\n");
 	echo("\t\t\t<div class=\"container\">\n");
 	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
-	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/idx2.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
 	echo("\t\t\t\t</nav>\n");
 	echo("\t\t\t</div>\n");
 	echo("\t\t</div>\n");
 }
 
+function getDashboardPage() {
+	echo("<body>\n");
+	echo("\t\t<div id=\"fb-root\"></div>\n");
+	echo("\t\t<div class=\"blog-masthead\">\n");
+	echo("\t\t\t<div class=\"container\">\n");
+	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
+	echo("\t\t\t\t</nav>\n");
+	echo("\t\t\t</div>\n");
+	echo("\t\t</div>\n");
+	echo("\t\t<div class=\"container dashboard\">\n");
+}
+
 function getFooterJS() {
-	echo("\t\t</div> <!-- end wrap -->\n");
+	echo("\t\t</div> <!-- end container or wrap-->\n");
 	echo("\t<!-- Javascript files will go under here -->\n");
 	echo("\t<script src=\"js/bootstrap.min.js\"></script>\n");
 	echo("\t<script src=\"js/login-page.js\"></script>\n");
@@ -92,9 +124,17 @@ function getFooterOld() {
 	echo("</html>");
 }
 
-function getFooter() {
+function getIndexFooter() {
+	echo("\t<!-- Social footer -->\n");
+	echo("\t<footer class=\"blog-footer-index\">");
+}
+
+function getDashFooter() {
 	echo("\t<!-- Social footer -->\n");
 	echo("\t<footer class=\"blog-footer\">");
+}
+
+function getFooter() {
 	echo("\t\t<div class=\"row blog-footer-row\">");
 	echo("\t\t\t<div class=\"col-md-offset-1 col-md-10 text-center\" style=\"height: 88px;\">");
 	//echo("\t\t\t<h5 class=\"text-center\">Stay in touch</h5>");

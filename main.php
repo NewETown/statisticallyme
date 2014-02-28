@@ -37,14 +37,8 @@ if($user_id) {
 		// echo "Name: " . $user_profile['name'];
 
 	} catch(FacebookApiException $e) {
-		// If the user is logged out, you can have a 
-		// user ID even though the access token is invalid.
-		// In this case, we'll get an exception, so we'll
-		// just ask the user to login again here.
-		// $login_url = $facebook->getLoginUrl(); 
-		// echo 'Please <a href="' . $login_url . '">login.</a>';
-		error_log($e->getType());
-		error_log($e->getMessage());
+		PC::db($e->getType());
+		PC::db($e->getMessage());
 
 		PC::db('Unable to get user info');
 		header('location: http://localhost/statisticallyme/index.php');
@@ -52,13 +46,69 @@ if($user_id) {
 
 } else {
 
-	// No user, print a link for the user to login
-	// $login_url = $facebook->getLoginUrl();
-	// echo 'Please <a href="' . $login_url . '">login.</a>';
-
 	PC::db('No user logged in');
 	header('location: http://localhost/statisticallyme/index.php');
 }
+
+getDashboardPage();
+
+?>
+
+	<div class="row">
+		<h3 id="welcome"></h3>
+	</div>
+
+	<div class="row">
+		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
+		<h2 class="text-center">Explore</h2>
+		<div class="row">
+			<div class="col-md-4 text-center" style="height:300px;">
+				<h3 >my likes</h3>
+				<a href="map.php"><h5>Go to Map</h5></a>
+			</div>
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 2</h3>
+			</div>
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 3</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
+		<h2 class="text-center">Participate</h2>
+		<div class="row">
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Take a quiz</h3>
+			</div>
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 2</h3>
+			</div>
+			<div class="col-md-4 text-center" style="height:300px;">
+				<h3 class="text-center">Update my info</h3>
+				<button id="getLikes" class="btn">Update Likes</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
+		<h2 class="text-center">Create</h2>
+		<div class="row">
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 1</h3>
+			</div>
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 2</h3>
+			</div>
+			<div class="col-md-4" style="height:300px;">
+				<h3 class="text-center">Thing 3</h3>
+			</div>
+		</div>
+	</div>
+
+<?php
 
 getFooterJS();
 
@@ -66,11 +116,13 @@ getFooterJS();
 
 <script>
 $(document).ready(function() {
-	$('#navHeader').text('Statistically you, <?php echo $user_profile["first_name"]; ?>');
+	$('#welcome').text('Hello <?php echo $user_profile["first_name"]; ?>, what would you like to do today?');
 });
 </script>
 
 <?php
+
+getDashFooter();
 
 getFooter();
 

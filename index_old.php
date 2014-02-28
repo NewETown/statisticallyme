@@ -2,7 +2,7 @@
 
 require_once 'dbconfig.php';
 require_once 'settings.php';
-require_once 'src/facebook.php';
+require_once 'fb-sdk/facebook.php';
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

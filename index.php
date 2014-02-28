@@ -5,10 +5,7 @@ require_once 'settings.php';
 require_once 'fb-sdk/facebook.php';
 require_once '../php-console/src/PhpConsole/__autoload.php';
 
-// Call debug from global PC class-helper (most short & easy way)
-PhpConsole\Helper::register(); // required to register PC class in global namespace, must be called only once
-// PC::debug('called from PC::debug()', 'db');
-// PC::db('called from PC::__callStatic()'); // means "db" will be handled as debug tag
+PhpConsole\Helper::register(); 
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -25,19 +22,9 @@ $config = array(
 $facebook = new Facebook($config);
 $user_id = $facebook->getUser();
 
-// if($user_id) {
-//     header('location: localhost/statisticallyme/main.php'); 
-// }
-
-// $params = array(
-//   'ok_session' => 'http://localhost/statisticallyme/main.php',
-//   'no_user' => 'http://localhost/statisticallyme/idx2.php',
-//   'no_session' => 'http://localhost/statisticallyme/idx2.php'
-// );
-
-// header('location: '.$facebook->getLoginStatusUrl($params));
-
 getHeader();
+
+getFixedIndexPage();
 
 if($user_id) {
 
@@ -63,9 +50,17 @@ if($user_id) {
 
 	echoLoginOptions();
 
-}
+} ?>
+
+<script>
+
+</script>
+
+<?php
 
 getFooterJS();
+
+getIndexFooter();
 
 getFooter();
 
