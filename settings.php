@@ -46,7 +46,7 @@ function getHeader() {
 	echo("\t\t<div class=\"blog-masthead\">\n");
 	echo("\t\t\t<div class=\"container\">\n");
 	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
-	echo("\t\t\t\t<a class=\"blog-nav-item active\" href=\"http://localhost/statisticallyme/idx2.php\"><h3>STATISTICALLY.ME</h3></a>\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/idx2.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
 	echo("\t\t\t\t</nav>\n");
 	echo("\t\t\t</div>\n");
 	echo("\t\t</div>\n");
@@ -127,6 +127,16 @@ function getFooter() {
 
 	echo("\t</body>");
 	echo("</html>");
+}
+
+function echoLoginOptions() {
+	echo "\t<div class=\"hero\">";
+	echo "\t\t<div class=\"greeting\">";
+	echo "\t\t\t<h4>Learn something about yourself</h4>";
+	echo "\t\t\t<!-- <h1>Statistically.Me</h1> -->";
+	echo "\t\t\t<a id=\"fbRegister\" href=\"#\"><img src=\"img/flat_fb_login.png\"></a>";
+	echo "\t\t</div>";
+	echo "\t</div>";
 }
 
 ?>

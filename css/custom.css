@@ -123,9 +123,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .wrap {
+  /* When I have a good picture this will be working code
   background-image: url(http://placehold.it/2800x2600/6796a1/ffffff&text=background+placeholder);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;*/
+  background-color: #6796a1;
   min-height: 100%;
 }
 

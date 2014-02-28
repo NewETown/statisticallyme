@@ -4,6 +4,7 @@ window.fbAsyncInit = function() {
 	FB.init({
 		appId      : '407908079353620',
 		status     : true,
+		cookie     : true,
 		xfbml      : true
 	});
 
@@ -16,17 +17,10 @@ window.fbAsyncInit = function() {
 			// have logged in to the app.
 			FB.api('/me', function(res) {
 				_id = res.id;
-				$('#logout').html('Welcome ' + res.first_name);
-				console.log(res.first_name);
 			});
-			$('#login').css('display', 'none');
-			$('#register').css('display', 'none');
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
-			$('#login').css('display', 'inline-block');
-			$('#register').css('display', 'inline-block');
-			$('#fbPic').css('display', 'none');
 		}
 	});
 }
@@ -56,6 +50,7 @@ $('#fbRegister').on('click',
 								// POST callback
 								console.log("POST callback arrived:");
 								console.log(resp);
+								window.location = "main.php";
 							});
 						}
 					);
