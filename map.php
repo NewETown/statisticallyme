@@ -24,7 +24,8 @@ getFixedIndexPage();
 	<h2>Where do you fit in?</h2>
 </div>
 
-<div id="map">
+<div class="row">
+	<div id="map" class="col-md-offset-1 col-md-10"></div>
 </div>
 
 <?php
@@ -55,7 +56,7 @@ function showPosition(position) {
 function initialize() {
 	var mapOptions = {
 		center: _center,
-		zoom: 14,
+		zoom: 11,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
