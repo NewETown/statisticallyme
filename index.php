@@ -9,7 +9,9 @@ PhpConsole\Helper::register();
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+	PC::db("Connected");
 } catch (PDOException $pe){
+	PC::db($pe->getMessage());
 	die("Could not connect to the database $dbname: " . $pe->getMessage());
 }
 
@@ -42,8 +44,8 @@ if($user_id) {
 		// In this case, we'll get an exception, so we'll
 		// just ask the user to login again here.
 		echoLoginOptions();
-		PC::db($e->getType());
-		PC::db($e->getMessage());
+		//PC::db($e->getType());
+		//PC::db($e->getMessage());
 	}
 
 } else { 
@@ -52,13 +54,11 @@ if($user_id) {
 
 } ?>
 
-<script>
-
-</script>
+</div> <!-- end container or wrap-->
 
 <?php
 
-getFooterJS();
+getIndexJS();
 
 getIndexFooter();
 

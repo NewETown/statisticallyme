@@ -84,11 +84,18 @@ function getDashboardPage() {
 	echo("\t\t<div class=\"container dashboard\">\n");
 }
 
-function getFooterJS() {
+function getIndexJS() {
 	echo("\t\t</div> <!-- end container or wrap-->\n");
 	echo("\t<!-- Javascript files will go under here -->\n");
 	echo("\t<script src=\"js/bootstrap.min.js\"></script>\n");
 	echo("\t<script src=\"js/login-page.js\"></script>\n");
+}
+
+function getFooterJS() {
+	echo("\t\t</div> <!-- end container or wrap-->\n");
+	echo("\t<!-- Javascript files will go under here -->\n");
+	echo("\t<script src=\"js/bootstrap.min.js\"></script>\n");
+	echo("\t<script src=\"js/dashboard.js\"></script>\n");
 }
 
 function getFooterOld() {

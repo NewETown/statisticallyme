@@ -1,4 +1,4 @@
-var firstName = "", lastName =  "", _email = "", _id = 0, lat = 0.00, lng = 0.00;
+var lat = 0.00, lng = 0.00;
 
 window.fbAsyncInit = function() {
 	FB.init({
@@ -15,9 +15,7 @@ window.fbAsyncInit = function() {
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
-			FB.api('/me', function(res) {
-				_id = res.id;
-			});
+			// window.location = "main.php";
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
@@ -50,7 +48,7 @@ $('#fbRegister').on('click',
 								// POST callback
 								console.log("POST callback arrived:");
 								console.log(resp);
-								window.location = "main.php";
+								// window.location = "main.php";
 							});
 						}
 					);
@@ -64,64 +62,6 @@ $('#fbRegister').on('click',
 		{scope: 'email,user_likes'}
 	)
 });
-
-$('#logout').on('click', function () { 
-	FB.logout(function (response) {console.log("Logged out");})
-	$('#login').css('display', 'inline-block');
-	$('#register').css('display', 'inline-block');
-	$('#logout').css('display', 'none');
-});
-
-var likes = [];
-var page = 0;
-
-$('#getLikes').on('click', function() {
-	// Print out each "like"
-	console.log("Fetching likes");
-	if(likes.length == 0) {
-		FB.api('me/likes', function(res) {
-			iteratePages(res);
-		}); 
-	} else {
-		storeLikes();
-	}
-});
-
-function iteratePages(res) {
-	page++;
-	var _date = "",
-		_dYMD = "",
-		_dTime = "",
-		_dHolder;
-
-	for(var i = 0; i < res.data.length; i++ ) {
-		res.data[i].created_time = res.data[i].created_time.split("T")[0];
-		likes.push(res.data[i]);
-	}
-
-	next = res.paging.next;
-
-	if(next == undefined)
-		storeLikes();
-
-	$.get(next, iteratePages, 'json');
-}
-
-function storeLikes() {
-	console.log(likes.length);
-	console.log("Storing likes");
-
-	var stringy = JSON.stringify(likes);
-	$.post(
-		'store_likes.php',
-		{ arr: stringy, fb_id: _id, count: likes.length },
-		function(resp) {
-			console.log("Store Likes response:");
-			console.log(resp);
-		}
-
-	);
-}
 
 function getUserLoc() {
 	if (navigator.geolocation)
