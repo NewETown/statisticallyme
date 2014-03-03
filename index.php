@@ -28,7 +28,7 @@ getHeader();
 
 getFixedIndexPage();
 
-phpinfo();
+// phpinfo();
 
 if($user_id) {
 
