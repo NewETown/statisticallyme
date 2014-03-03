@@ -1,8 +1,14 @@
 <?php
-$host = 'us-cdbr-azure-west-b.cleardb.com';
-$dbname = 'cdb_00080ca54c';
-$username = 'ba22e992fac694';
-$password =  '585c68a7';
+$host = 'localhost';
+$dbname = 'digprototype';
+$username = 'root';
+$password =  '';
+
+// $host = 'us-cdbr-azure-west-b.cleardb.com';
+// $dbname = 'cdb_00080ca54c';
+// $username = 'ba22e992fac694';
+// $password =  '585c68a7';
+
 $app_secret = '44c2f29a94094105db315373c727fe63';
 
 /*

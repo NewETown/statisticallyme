@@ -77,7 +77,7 @@ function getDashboardPage() {
 	echo("\t\t<div class=\"blog-masthead\">\n");
 	echo("\t\t\t<div class=\"container\">\n");
 	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
-	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"main.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
 	echo("\t\t\t\t</nav>\n");
 	echo("\t\t\t</div>\n");
 	echo("\t\t</div>\n");
@@ -152,7 +152,7 @@ function getFooter() {
 	//echo("\t\t\t\t<a href=\"#\"><img src=\"img/li_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
 	echo("\t\t\t</div>");
 	//echo("\t\t\t</div>");
-	echo("\t\t\t<div class=\"text-center\">");
+	echo("\t\t\t<div id=\"footerNav\" class=\"text-center\">");
 	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\" style=\"margin-left:-69px;\"><h3 style=\"display:inline-block;\">Home</h3></a>");
 	echo("\t\t\t\t<span style=\"text-align:center;\">•</span>");
 	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\"><h3 style=\"display:inline-block;\">About</h3></a>");

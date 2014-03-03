@@ -102,9 +102,9 @@ try {
 	$q->execute($task);
 
 	echo("Welcome " . $f_name . " " . $l_name . "!\n");
-	echo("FB_ID: " . $fb_id . "\n");
-	echo("Lat: " . $lat . "\n");
-	echo("Lng: " . $lng . "\n");
+	// echo("FB_ID: " . $fb_id . "\n");
+	// echo("Lat: " . $lat . "\n");
+	// echo("Lng: " . $lng . "\n");
 
 } catch (PDOException $pe) {
 	// die("Error registering user: " . $pe->getCode());

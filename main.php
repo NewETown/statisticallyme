@@ -1,7 +1,10 @@
 <?php session_start();
 
+ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
 require_once 'dbconfig.php';
 require_once 'settings.php';
+require_once 'check_refresh.php';
 require_once 'fb-sdk/facebook.php';
 require_once '../php-console/src/PhpConsole/__autoload.php';
 
@@ -51,6 +54,12 @@ if($user_id) {
 }
 
 getDashboardPage();
+
+try {
+	checkLikeRefreshDate($conn, $user_id);
+} catch(PDOException $pe) {
+	PC::db($pe);
+}
 
 ?>
 

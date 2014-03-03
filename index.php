@@ -36,7 +36,7 @@ if($user_id) {
 
 		$user_profile = $facebook->api('/me','GET');
 		PC::db($user_profile['name']);
-		header('location: http://localhost/statisticallyme/main.php');
+		header('location: main.php');
 
 	} catch(FacebookApiException $e) {
 		// If the user is logged out, you can have a 

@@ -11,7 +11,7 @@ window.fbAsyncInit = function() {
 	FB.Event.subscribe('auth.authResponseChange', function(response) {
 		// Here we specify what we do with the response anytime this event occurs. 
 		if (response.status === 'connected') {
-			console.log("Connected");
+			console.log("User is connected");
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
@@ -29,10 +29,11 @@ $('#fbRegister').on('click',
 		function (response) {
 			if (response.status=="connected") {
 				// using jQuery to perform AJAX POST.
-				console.log("Registered");
+				console.log("Getting location");
+				getUserLoc();
 				FB.api('/me', function(person) {
+					console.log("Calling FB.api/me");
 					var _city = null, _state = null, _country = null;
-					getUserLoc();
 					FB.api({
 							method: 'fql.query',
 							query: 'SELECT current_location FROM user WHERE uid='+person.id,
@@ -41,22 +42,20 @@ $('#fbRegister').on('click',
 							_city = loc[0].current_location.city;
 							_state = loc[0].current_location.state;
 							_country = loc[0].current_location.country;
-							console.log(_city + " " + _state + " " + _country);
+							console.log("In FB.api callback, ajaxing info");
 							$.post('register.php',
 									{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
 									function(resp) {
 								// POST callback
 								console.log("POST callback arrived:");
 								console.log(resp);
-								// window.location = "main.php";
+								window.location = "main.php";
 							});
 						}
 					);
 				});
-				$('#getLikes').css("visibility", "visible");
 			} else {
 				console.log(response.status);
-				$('#getLikes').css("visibility", "hidden");
 			}
 		},
 		{scope: 'email,user_likes'}
@@ -71,9 +70,9 @@ function getUserLoc() {
 }
 
 function showPosition(position) {
-	console.log("Lat, lng " + position.coords.latitude + ", " + position.coords.longitude);
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
+	console.log("Lat: " + lat + ", lng: " + lng);
 	// _center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 	// _heatmapData.push(_center);
 }
