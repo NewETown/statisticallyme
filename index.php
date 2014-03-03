@@ -3,11 +3,9 @@
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'fb-sdk/facebook.php';
-require_once 'php-console/src/PhpConsole/__autoload.php';
+//require_once 'php-console/src/PhpConsole/__autoload.php';
 
-phpinfo();
-
-PhpConsole\Helper::register(); 
+//PhpConsole\Helper::register(); 
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -30,6 +28,8 @@ getHeader();
 
 getFixedIndexPage();
 
+phpinfo();
+
 if($user_id) {
 
 	// We have a user ID, so probably a logged in user.
@@ -37,7 +37,7 @@ if($user_id) {
 	try {
 
 		$user_profile = $facebook->api('/me','GET');
-		PC::db($user_profile['name']);
+		//PC::db($user_profile['name']);
 		header('location: main.php');
 
 	} catch(FacebookApiException $e) {
