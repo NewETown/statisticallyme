@@ -3,7 +3,7 @@
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'fb-sdk/facebook.php';
-require_once '../php-console/src/PhpConsole/__autoload.php';
+require_once 'php-console/src/PhpConsole/__autoload.php';
 
 // Call debug from global PC class-helper (most short & easy way)
 PhpConsole\Helper::register(); // required to register PC class in global namespace, must be called only once
