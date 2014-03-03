@@ -9,9 +9,9 @@ require_once 'fb-sdk/facebook.php';
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-	PC::db("Connected");
+	//PC::db("Connected");
 } catch (PDOException $pe){
-	PC::db($pe->getMessage());
+	//PC::db($pe->getMessage());
 	die("Could not connect to the database $dbname: " . $pe->getMessage());
 }
 
