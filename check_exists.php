@@ -15,6 +15,7 @@ $fb_id = null;
 if(isset($_REQUEST['fb_id'])) {
 	$fb_id = $_REQUEST['fb_id'];
 	$fb_id = trim($fb_id);
+	$fb_id = $fb_id + 0;
 }
 
 try {
