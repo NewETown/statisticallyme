@@ -1,4 +1,4 @@
-var lat = 0.00, lng = 0.00;
+var lat = 0, lng = 0;
 
 window.fbAsyncInit = function() {
 	FB.init({
@@ -24,57 +24,60 @@ window.fbAsyncInit = function() {
 }
 
 $('#fbRegister').on('click', 
-	function () { 
-	FB.login( 
-		function (response) {
-			if (response.status=="connected") {
-				// using jQuery to perform AJAX POST.
-				console.log("Getting location");
-				getUserLoc();
-				FB.api('/me', function(person) {
-					console.log("Calling FB.api/me");
-					var _city = null, _state = null, _country = null;
-					FB.api({
-							method: 'fql.query',
-							query: 'SELECT current_location FROM user WHERE uid='+person.id,
-							return_ssl_resources: 1
-						}, function (loc) {
-							_city = loc[0].current_location.city;
-							_state = loc[0].current_location.state;
-							_country = loc[0].current_location.country;
-							console.log("In FB.api callback, ajaxing info");
-							$.post('register.php',
-									{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
-									function(resp) {
-								// POST callback
-								console.log("POST callback arrived:");
-								console.log(resp);
-								window.location = "main.php";
-							});
-						}
-					);
-				});
-			} else {
-				console.log(response.status);
-			}
-		},
-		{scope: 'email,user_likes'}
-	)
+	function () {
+		if(lat != 0 && lng != 0)
+			login();
 });
 
 function getUserLoc() {
 	if (navigator.geolocation)
-		navigator.geolocation.getCurrentPosition(showPosition);
+		navigator.geolocation.getCurrentPosition(getPos, denyWarn);
 	else
-		console.log("Geolocation is not supported by this browser.");
+		$('.greeting').append("<h2>It looks like you're using an outdated browser, we recommend downloading the latest <a href=\"https://chrome.google.com\">Chrome</a> or <a href=\"http://www.mozilla.org/en-US/firefox/new/\"Firefox</a> browser</h2>");
 }
 
-function showPosition(position) {
+function getPos(position) {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
 	console.log("Lat: " + lat + ", lng: " + lng);
-	// _center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-	// _heatmapData.push(_center);
+	
+}
+
+function denyWarn() {
+	$('.greeting').append("<h2>Sorry, you must allow location info for this site to work!</h2>");
+}
+
+function login() {
+	FB.login( function (response) {
+		if (response.status=="connected") {
+			// using jQuery to perform AJAX POST.
+			FB.api('/me', function(person) {
+				console.log("Calling FB.api/me");
+				var _city = null, _state = null, _country = null;
+				FB.api({
+						method: 'fql.query',
+						query: 'SELECT current_location FROM user WHERE uid='+person.id,
+						return_ssl_resources: 1
+					}, function (loc) {
+						_city = loc[0].current_location.city;
+						_state = loc[0].current_location.state;
+						_country = loc[0].current_location.country;
+						console.log("In FB.api callback, ajaxing info");
+						$.post('register.php',
+								{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
+								function(resp) {
+							// POST callback
+							console.log("POST callback arrived:");
+							console.log(resp);
+							window.location = "main.php";
+						});
+					}
+				);
+			});
+		} else {
+			console.log(response.status);
+		}
+	}, {scope: 'email,user_likes'});
 }
 
 // Here we run a very simple test of the Graph API after login is successful. 
