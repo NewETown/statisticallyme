@@ -16,8 +16,8 @@ window.fbAsyncInit = function() {
 			// have logged in to the app.
 			FB.api('/me', function(res) {
 				person = res;
+				$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
 			});
-			$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
