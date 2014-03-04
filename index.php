@@ -32,7 +32,7 @@ getFixedIndexPage();
 
 echoLoginOptions();
 
-} ?>
+?>
 
 </div> <!-- end container or wrap-->
 
