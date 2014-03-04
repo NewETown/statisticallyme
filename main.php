@@ -30,25 +30,7 @@ $user_profile = null;
 
 getHeader();
 
-if($user_id) {
-
-	// We have a user ID, so probably a logged in user.
-	// If not, we'll get an exception, which we handle below.
-	try {
-
-		$user_profile = $facebook->api('/me','GET');
-		// echo "Name: " . $user_profile['name'];
-
-	} catch(FacebookApiException $e) {
-		// PC::db($e->getType());
-		// PC::db($e->getMessage());
-
-		// PC::db('Unable to get user info');
-		echo("Couldn't get user profile");
-	}
-
-} else {
-
+if(!$user_id) {
 	// // PC::db('No user logged in');
 	header('location: index.php');
 }
@@ -96,7 +78,7 @@ getFooterJS();
 
 <script>
 $(document).ready(function() {
-	$('#welcome').text('Hello <?php echo $user_profile["first_name"]; ?>, what would you like to do today?');
+	$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
 });
 </script>
 

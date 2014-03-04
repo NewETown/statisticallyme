@@ -20,6 +20,7 @@ window.fbAsyncInit = function() {
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
+			window.location = 'index.php';
 		}
 	});
 }
