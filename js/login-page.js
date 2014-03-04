@@ -23,13 +23,19 @@ window.fbAsyncInit = function() {
 	});
 }
 
-$('#fbRegister').on('click', 
-	function () {
-		if(lat != 0 && lng != 0)
-			login();
-		else
-			getUserLoc();
+$(document).ready(function() {
+	getUserLoc();
+	$('#fbRegister').on('click', 
+		function () {
+			if(lat != 0 && lng != 0)
+				login();
+			else  {
+				$('.greeting').append("<h2>It looks like you're using an outdated browser, we recommend downloading the latest <a href=\"https://chrome.google.com\">Chrome</a> or <a href=\"http://www.mozilla.org/en-US/firefox/new/\"Firefox</a> browser</h2>");
+				getUserLoc();
+			}
+	});
 });
+
 
 function getUserLoc() {
 	if (navigator.geolocation)
