@@ -44,7 +44,7 @@ if($user_id) {
 		// PC::db($e->getMessage());
 
 		// PC::db('Unable to get user info');
-		header('location: index.php');
+		echo("Couldn't get user profile");
 	}
 
 } else {
