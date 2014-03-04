@@ -44,76 +44,46 @@ if($user_id) {
 		PC::db($e->getMessage());
 
 		PC::db('Unable to get user info');
-		header('location: http://localhost/statisticallyme/index.php');
+		header('location: index.php');
 	}
 
 } else {
 
 	PC::db('No user logged in');
-	header('location: http://localhost/statisticallyme/index.php');
+	header('location: index.php');
 }
 
-getDashboardPage();
-
-try {
-	checkLikeRefreshDate($conn, $user_id);
-} catch(PDOException $pe) {
-	PC::db($pe);
-}
+getFixedIndexPage();
 
 ?>
 
 	<div class="row">
-		<h3 id="welcome"></h3>
+		<h3 id="welcome" class="text-center" style="padding-top:40px;"></h3>
 	</div>
 
-	<div class="row">
+	<div class="row" style="padding-top:40px;">
 		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
-		<h2 class="text-center">Explore</h2>
-		<div class="row">
-			<div class="col-md-4 text-center" style="height:300px;">
-				<h3 >my likes</h3>
-				<a href="map.php"><h5>Go to Map</h5></a>
-			</div>
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 2</h3>
-			</div>
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 3</h3>
-			</div>
+		<div class="col-md-4" style="height:300px;">
+			<h2 class="text-center">Explore</h2>
+			<p>In today's data-filled world everyone is a statistic. At Statistically.Me we want to empower you to learn from your own data. As our system grows we will be able to tell you more about yourself!</p>
+			<p>First thing first, check out our heatmap to see where other people are who share your interests.</p>
+			<button class="btn"><a href="map.php">Go to Map</a></button>
 		</div>
-	</div>
-
-	<div class="row">
-		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
-		<h2 class="text-center">Participate</h2>
-		<div class="row">
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Take a quiz</h3>
-			</div>
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 2</h3>
-			</div>
-			<div class="col-md-4 text-center" style="height:300px;">
-				<h3 class="text-center">Update my info</h3>
-				<button id="getLikes" class="btn">Update Likes</button>
-			</div>
+		<div class="col-md-4" style="height:300px;">
+			<h2 class="text-center">Participate</h2>
+			<h3 class="text-center">Take a quiz <h6>(coming soon)</h6></h3>
+			<h3 class="text-center">Update my info</h3>
+			<?php 
+				try {
+					checkLikeRefreshDate($conn, $user_id);
+				} catch(PDOException $pe) {
+					PC::db($pe);
+				}
+			?>
 		</div>
-	</div>
-
-	<div class="row">
-		<!-- Need to make a row with a line that stirkes the left and right sides of a heading  -->
-		<h2 class="text-center">Create</h2>
-		<div class="row">
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 1</h3>
-			</div>
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 2</h3>
-			</div>
-			<div class="col-md-4" style="height:300px;">
-				<h3 class="text-center">Thing 3</h3>
-			</div>
+		<div class="col-md-4" style="height:300px;">
+			<h2 class="text-center">Share and Create</h2>
+			<p>Soon enough you will be able to create your own quizzes and broadcast the interesting things you discover about yourself. Our social integration provides you with an easy platform to connect with others and share the things you discover.</p>
 		</div>
 	</div>
 
@@ -131,7 +101,7 @@ $(document).ready(function() {
 
 <?php
 
-getDashFooter();
+getIndexFooter();
 
 getFooter();
 

@@ -17,7 +17,7 @@ window.fbAsyncInit = function() {
 			FB.api('/me', function(res) {
 				person = res;
 			});
-			$('#footerNav').append("<span style=\"text-align:center;\">•</span>\n<a href=\"#\" id=\"logout\" class=\"blog-nav-item\"><h3 style=\"display:inline-block;\">Logout</h3></a>");
+			$('#footerNav').append("<span style=\"text-align:center;\">•</span>\n<a href=\"#\" class=\"blog-nav-item logout\"><h3 style=\"display:inline-block;\">Logout</h3></a>");
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
@@ -25,9 +25,11 @@ window.fbAsyncInit = function() {
 	});
 }
 
-$('#logout').on('click', function () { 
-	FB.logout(function (response) {console.log("Logged out");})
-	window.location = 'index.php';
+$(document).ready(function() {
+	$('.logout').click(function() {
+		FB.logout(function (response) {console.log("Logged out");})
+		window.location = 'index.php';
+	});
 });
 
 var likes = [];

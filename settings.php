@@ -143,23 +143,17 @@ function getDashFooter() {
 
 function getFooter() {
 	echo("\t\t<div class=\"row blog-footer-row\">");
-	echo("\t\t\t<div class=\"col-md-offset-1 col-md-10 text-center\" style=\"height: 88px;\">");
-	//echo("\t\t\t<h5 class=\"text-center\">Stay in touch</h5>");
-	//echo("\t\t\t<div class=\"social-container\">");
+	echo("\t\t\t<div class=\"col-md-offset-1 col-md-10 text-center\" style=\"height: 90px;\">");
 	echo("\t\t\t<div class=\"pull-left\" style=\"padding-top: 25px;\">");
 	echo("\t\t\t\t<a href=\"https://www.facebook.com/StatisticallyMe\" target=\"new\"><img src=\"img/fb_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
 	echo("\t\t\t\t<a href=\"https://twitter.com/ThatCodeDude\" target=\"new\"><img src=\"img/tw_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
 	//echo("\t\t\t\t<a href=\"#\"><img src=\"img/li_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
 	echo("\t\t\t</div>");
-	//echo("\t\t\t</div>");
 	echo("\t\t\t<div id=\"footerNav\" class=\"text-center\">");
 	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\" style=\"margin-left:-69px;\"><h3 style=\"display:inline-block;\">Home</h3></a>");
 	echo("\t\t\t\t<span style=\"text-align:center;\">•</span>");
 	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\"><h3 style=\"display:inline-block;\">About</h3></a>");
 	echo("\t\t\t</div>");
-	// echo("\t\t\t<div class=\"pull-right\" style=\"padding-top:30px;\">");
-	// echo("\t\t\t\t<p>&#169; Mental Tangent, 2014</p>");
-	// echo("\t\t\t</div>");
 	echo("\t\t</div>");
 	echo("\t</footer>");
 

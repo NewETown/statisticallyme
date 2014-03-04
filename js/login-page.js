@@ -15,7 +15,7 @@ window.fbAsyncInit = function() {
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
-			// window.location = "main.php";
+			window.location = "main.php";
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
