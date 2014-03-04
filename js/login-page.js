@@ -27,6 +27,8 @@ $('#fbRegister').on('click',
 	function () {
 		if(lat != 0 && lng != 0)
 			login();
+		else
+			getUserLoc();
 });
 
 function getUserLoc() {
