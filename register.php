@@ -86,7 +86,6 @@ try {
 
 	$q->execute($task);
 
-	echo("Welcome " . $f_name . " " . $l_name . "!\n");
 	header('location: main.php');
 	// echo("FB_ID: " . $fb_id . "\n");
 	// echo("Lat: " . $lat . "\n");

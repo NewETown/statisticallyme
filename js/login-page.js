@@ -20,11 +20,11 @@ window.fbAsyncInit = function() {
 				$.post('check_exists.php',
 						{ fb_id: person.id },
 						function(resp) {
-					// POST callback
-					console.log("POST for connected status:");
-					console.log(resp);
-				});
-			}
+							// POST callback
+							console.log("POST for connected status:");
+							console.log(resp);
+						});
+					});
 		} else {
 			// The user isn't auth'd
 			console.log(response.status);
