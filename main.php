@@ -74,16 +74,6 @@ getFixedIndexPage();
 
 getFooterJS();
 
-?>
-
-<script>
-$(document).ready(function() {
-	$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
-});
-</script>
-
-<?php
-
 getFooter();
 
 ?>
