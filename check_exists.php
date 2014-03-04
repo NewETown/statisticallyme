@@ -31,7 +31,7 @@ try {
 	$q->execute($task);
 
 	if($q->rowCount() > 0)
-		header('location: http://beta.statistically.me/main.php');
+		echo("1");
 	// echo("FB_ID: " . $fb_id . "\n");
 	// echo("Lat: " . $lat . "\n");
 	// echo("Lng: " . $lng . "\n");

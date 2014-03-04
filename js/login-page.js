@@ -22,7 +22,8 @@ window.fbAsyncInit = function() {
 						function(resp) {
 							// POST callback
 							console.log("POST for connected status:");
-							console.log(resp);
+							if(resp == "1")
+								window.location = "main.php";
 						});
 					});
 		} else {
@@ -79,13 +80,13 @@ function login() {
 						_country = loc[0].current_location.country;
 						console.log("In FB.api callback, ajaxing info");
 						$.post('register.php',
-								{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
-								function(resp) {
-							// POST callback
-							console.log("POST callback arrived:");
-							console.log(resp);
-							// window.location = "main.php";
-						});
+							{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
+							function(resp) {
+								if(resp == "1")
+									window.location = "main.php";
+								else
+									console.log(resp);
+							});
 					}
 				);
 			});
