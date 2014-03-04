@@ -65,7 +65,7 @@ function getFixedIndexPage() {
 	echo("\t\t<div class=\"blog-masthead\">\n");
 	echo("\t\t\t<div class=\"container\">\n");
 	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
-	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"http://localhost/statisticallyme/\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
+	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"index.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
 	echo("\t\t\t\t</nav>\n");
 	echo("\t\t\t</div>\n");
 	echo("\t\t</div>\n");
