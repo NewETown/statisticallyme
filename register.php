@@ -89,6 +89,7 @@ try {
 	echo("1");
 
 } catch (PDOException $pe) {
+	echo("Something went wrong: " . $pe);
 	die("Error registering user: " . $pe->getMessage());
 }
 

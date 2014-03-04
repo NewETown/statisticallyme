@@ -24,6 +24,8 @@ window.fbAsyncInit = function() {
 							console.log("POST for connected status:");
 							if(resp == "1")
 								window.location = "main.php";
+							else
+								$('.greeting').html("<h2>Oh no! Something went wrong</h2>" + "<p>" + resp + "</p>");
 						});
 					});
 		} else {
