@@ -15,10 +15,10 @@ window.fbAsyncInit = function() {
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
-			window.location = "main.php";
+			// window.location = "main.php";
 		} else {
 			// The user isn't auth'd
-			console.log("Not auth'd");
+			console.log(response.status);
 		}
 	});
 }
@@ -30,7 +30,7 @@ $(document).ready(function() {
 			if(lat != 0 && lng != 0)
 				login();
 			else  {
-				$('.greeting').append("<h2>It looks like you're using an outdated browser, we recommend downloading the latest <a href=\"https://chrome.google.com\">Chrome</a> or <a href=\"http://www.mozilla.org/en-US/firefox/new/\"Firefox</a> browser</h2>");
+				$('.greeting').append("<h2>This website requires geolocation to work, please enable location data for your browser.</h2>");
 				getUserLoc();
 			}
 	});
@@ -47,8 +47,6 @@ function getUserLoc() {
 function getPos(position) {
 	lat = position.coords.latitude;
 	lng = position.coords.longitude;
-	console.log("Lat: " + lat + ", lng: " + lng);
-	
 }
 
 function denyWarn() {
@@ -77,7 +75,7 @@ function login() {
 							// POST callback
 							console.log("POST callback arrived:");
 							console.log(resp);
-							window.location = "main.php";
+							// window.location = "main.php";
 						});
 					}
 				);

@@ -12,8 +12,6 @@ try {
 
 $f_name = "";
 $l_name = "";
-$password = null;
-$_salt = null;
 $email = "";
 $fb_id = null;
 $date = date_format(new DateTime('now'), ('Y-m-d'));
@@ -41,11 +39,6 @@ if(isset($_REQUEST['email'])) {
 if(isset($_REQUEST['fb_id'])) {
 	$fb_id = $_REQUEST['fb_id'];
 	$fb_id = trim($fb_id);
-}
-
-if(isset($_REQUEST['password'])) {
-	$password = $_REQUEST['password'];
-	$password = md5(trim($password));
 }
 
 if(isset($_REQUEST['city'])) {
@@ -76,14 +69,6 @@ try {
 	$sql = 'INSERT INTO users(fb_id, f_name, l_name, email, reg_date, city, state, country, lat, lng)
 					VALUES(:fb_id, :f_name, :l_name, :email, :reg_date, :city, :state, :country, :lat, :lng)';
 
-	if($password != null) {
-		// Then the user isn't registering through Facebook
-		$_h = create_hash($password);
-		$_t = explode(":", $_h);
-		$_salt = $_t[2];
-		$password = $_t[3];
-	}
-
 	$task = array(
 				':fb_id' => $fb_id,
 				':f_name' => $f_name,
@@ -102,18 +87,13 @@ try {
 	$q->execute($task);
 
 	echo("Welcome " . $f_name . " " . $l_name . "!\n");
+	header("location: main.php");
 	// echo("FB_ID: " . $fb_id . "\n");
 	// echo("Lat: " . $lat . "\n");
 	// echo("Lng: " . $lng . "\n");
 
 } catch (PDOException $pe) {
-	// die("Error registering user: " . $pe->getCode());
-	if($pe->getCode() == 23000) {
-		echo($pe);
-		echo("You already exist in the database!");
-	} else {
-		echo($pe);
-	}
+	die("Error registering user: " . $pe->getMessage());
 }
 
 $conn = null;

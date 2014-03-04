@@ -150,7 +150,7 @@ function getFooter() {
 	//echo("\t\t\t\t<a href=\"#\"><img src=\"img/li_small_shadow.png\" class=\"img-responsive social-icon\"></a>");
 	echo("\t\t\t</div>");
 	echo("\t\t\t<div id=\"footerNav\" class=\"text-center\">");
-	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\" style=\"margin-left:-69px;\"><h3 style=\"display:inline-block;\">Home</h3></a>");
+	echo("\t\t\t\t<a href=\"index.php\" class=\"blog-nav-item\" style=\"margin-left:-69px;\"><h3 style=\"display:inline-block;\">Home</h3></a>");
 	echo("\t\t\t\t<span style=\"text-align:center;\">•</span>");
 	echo("\t\t\t\t<a href=\"#\" class=\"blog-nav-item\"><h3 style=\"display:inline-block;\">About</h3></a>");
 	echo("\t\t\t</div>");
@@ -162,7 +162,7 @@ function getFooter() {
   	echo("\t\t(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),");
   	echo("\t\tm=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)");
   	echo("\t\t})(window,document,'script','//www.google-analytics.com/analytics.js','ga');");
-  	echo("\t\tga('create', 'UA-42403118-7', 'statistically.me');");
+  	echo("\t\tga('create', 'UA-42403118-7', 'www.statistically.me');");
   	echo("\t\tga('send', 'pageview');");
 	echo("\t</script>");
 
