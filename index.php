@@ -24,6 +24,10 @@ $config = array(
 $facebook = new Facebook($config);
 $user_id = $facebook->getUser();
 
+if($user_id) {
+	header('Location: main.php');
+}
+
 getHeader();
 
 getFixedIndexPage();
@@ -41,7 +45,5 @@ echoLoginOptions();
 getIndexJS();
 
 getIndexFooter();
-
-getFooter();
 
 ?>

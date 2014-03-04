@@ -5,7 +5,6 @@ ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'get_interest_categories.php';
-require_once 'fb-sdk/facebook.php';
 // require_once 'php-console/src/PhpConsole/__autoload.php';
 
 // Call debug from global PC class-helper (most short & easy way)
@@ -127,8 +126,6 @@ function interestClick(interest) {
 </script>
 
 <?php
-
-getIndexFooter();
 
 getFooter();
 

@@ -102,8 +102,6 @@ $(document).ready(function() {
 
 <?php
 
-getIndexFooter();
-
 getFooter();
 
 ?>

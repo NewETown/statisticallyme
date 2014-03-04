@@ -17,7 +17,6 @@ window.fbAsyncInit = function() {
 			FB.api('/me', function(res) {
 				person = res;
 			});
-			$('#footerNav').append("<span style=\"text-align:center;\">•</span>\n<a href=\"index.php\" onclick=\"FB.logout();\" class=\"blog-nav-item\"><h3 style=\"display:inline-block;\">Logout</h3></a>");
 		} else {
 			// The user isn't auth'd
 			console.log("Not auth'd");
