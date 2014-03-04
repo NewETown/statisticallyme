@@ -30,28 +30,7 @@ getFixedIndexPage();
 
 // phpinfo();
 
-if($user_id) {
-
-	// // We have a user ID, so probably a logged in user.
-	// // If not, we'll get an exception, which we handle below.
-	// try {
-	// 	//$user_profile = $facebook->api('/me','GET');
-	// 	//PC::db($user_profile['name']);
-	// 	header('location: main.php');
-
-	// } catch(FacebookApiException $e) {
-	// 	// If the user is logged out, you can have a 
-	// 	// user ID even though the access token is invalid.
-	// 	// In this case, we'll get an exception, so we'll
-	// 	// just ask the user to login again here.
-	// 	echoLoginOptions();
-	// 	//PC::db($e->getType());
-	// 	//PC::db($e->getMessage());
-	// }
-
-} else { 
-
-	echoLoginOptions();
+echoLoginOptions();
 
 } ?>
 
