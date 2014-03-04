@@ -2,7 +2,7 @@
 
 function getFacebookCategories($conn) {
 
-	//PC::db("Checking like refresh date for ". $user_id);
+	// PC::db("Checking like refresh date for ". $user_id);
 
 	try {
 		$sql = 'SELECT DISTINCT category FROM interests';
@@ -33,8 +33,7 @@ function getFacebookCategories($conn) {
 		}
 
 	} catch (PDOException $pe) {
-		//PC::db($pe);
-		PC::db($pe."\n");
+		// PC::db($pe);
 	}
 
 	$conn = null;

@@ -7,7 +7,7 @@
 
 function checkLikeRefreshDate($conn, $user_id) {
 
-	//PC::db("Checking like refresh date for ". $user_id);
+	// PC::db("Checking like refresh date for ". $user_id);
 
 	try {
 		$sql = 'SELECT * FROM likes_refresh_data WHERE fb_id=:_id';
@@ -30,11 +30,11 @@ function checkLikeRefreshDate($conn, $user_id) {
 			$today_dt = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
 			$refresh_dt = new DateTime($refresh, new DateTimeZone('America/Los_Angeles'));
 		} catch(Exception $ex) {
-			PC::db("Failed calculating refresh info, refresh date probably null");
+			// PC::db("Failed calculating refresh info, refresh date probably null");
 		}
 
-		//PC::db($today_dt);
-		//PC::db($refresh_dt);
+		// PC::db($today_dt);
+		// PC::db($refresh_dt);
 
 		if($today_dt > $refresh_dt || $refresh == null)
 			echo("<button id=\"getLikes\" class=\"btn\">Update Likes</button>");
@@ -42,8 +42,7 @@ function checkLikeRefreshDate($conn, $user_id) {
 			echo("<p>You can update your \"like\" data after " . $refresh_dt->format('m-d') . "</p>");
 
 	} catch (PDOException $pe) {
-		//PC::db($pe);
-		PC::db($pe."\n");
+		// PC::db($pe);
 	}
 
 	$conn = null;
