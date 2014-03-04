@@ -16,6 +16,15 @@ window.fbAsyncInit = function() {
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
 			// window.location = "main.php";
+			FB.api('/me', function(person) {
+				$.post('check_exists.php',
+						{ fb_id: person.id },
+						function(resp) {
+					// POST callback
+					console.log("POST for connected status:");
+					console.log(resp);
+				});
+			}
 		} else {
 			// The user isn't auth'd
 			console.log(response.status);
