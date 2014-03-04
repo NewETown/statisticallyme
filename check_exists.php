@@ -20,7 +20,7 @@ if(isset($_REQUEST['fb_id'])) {
 
 try {
 
-	$sql = 'SELECT FROM users WHERE fb_id=:fb';
+	$sql = 'SELECT fb_id FROM users WHERE fb_id=:fb';
 
 	$task = array(
 				':fb' => $fb_id
@@ -37,7 +37,7 @@ try {
 	// echo("Lng: " . $lng . "\n");
 
 } catch (PDOException $pe) {
-	die("Error registering user: " . $pe->getMessage());
+	die($pe->getMessage());
 }
 
 $conn = null;
