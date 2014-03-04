@@ -87,13 +87,16 @@ try {
 	$q->execute($task);
 
 	echo("Welcome " . $f_name . " " . $l_name . "!\n");
-	header("location: main.php");
+	header('location: main.php');
 	// echo("FB_ID: " . $fb_id . "\n");
 	// echo("Lat: " . $lat . "\n");
 	// echo("Lng: " . $lng . "\n");
 
 } catch (PDOException $pe) {
-	die("Error registering user: " . $pe->getMessage());
+	if($pe->errorInfo[1] == 1062)
+		header('location: main.php');
+	else
+		die("Error registering user: " . $pe->getMessage());
 }
 
 $conn = null;
