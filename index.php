@@ -3,15 +3,15 @@
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'fb-sdk/facebook.php';
-require_once 'php-console/src/PhpConsole/__autoload.php';
+// require_once 'php-console/src/PhpConsole/__autoload.php';
 
-PhpConsole\Helper::register(); 
+// PhpConsole\Helper::register(); 
 
 try {
 	$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-	//PC::db("Connected");
+	// PC::db("Connected");
 } catch (PDOException $pe){
-	PC::db($pe->getMessage());
+	// PC::db($pe->getMessage());
 	die("Could not connect to the database $dbname: " . $pe->getMessage());
 }
 
