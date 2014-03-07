@@ -11,13 +11,67 @@
 			$sql += " OR interest.category =". $arr[i];
    		}
 
-   	SELECT DISTINCT u.fb_id
-	FROM users AS u
-	INNER JOIN interest_map AS im ON im.fb_id = u.fb_id
-	INNER JOIN interests AS i ON i.id = im.interest_id
-	WHERE i.category = 'Computers/technology' OR i.category = 'Artist'
+SELECT 
+ 	 DISTINCT (m.fb_id),
+     u.lat,
+     u.lng
+FROM interests AS i
+     INNER JOIN  interest_map AS m
+         ON ( i.id = m.interest_id )
+	 INNER JOIN users AS u ON m.fb_id = u.fb_id
+WHERE i.category = :category
+     AND EXISTS (
+             SELECT *
+             FROM interest_map AS m2
+             WHERE m2.fb_id = :fb_id
+                 AND m2.interest_id = m.interest_id
+         )
+ORDER BY m.fb_id, i.name;
+
 */
 
+function getMatchingFacebookLikes($conn) {
 
+	// PC::db("Checking like refresh date for ". $user_id);
+
+	$fb_id = null;
+	$category = null;
+
+	if(isset($_REQUEST['fb_id'])) {
+		$fb_id = $_REQUEST['fb_id'];
+	}
+
+	if(isset($_REQUEST['category'])) {
+		$category = $_REQUEST['category'];
+	}
+
+	try {
+		$sql = 'SELECT DISTINCT (m.fb_id), u.lat, u.lng FROM interests AS i INNER JOIN  interest_map AS m ON ( i.id = m.interest_id ) INNER JOIN users AS u ON m.fb_id = u.fb_id WHERE i.category = :category AND EXISTS (SELECT * FROM interest_map AS m2 WHERE m2.fb_id = :fb_id AND m2.interest_id = m.interest_id)';
+
+		$q = $conn->prepare($sql);
+
+		$task = array(
+			':fb_id' => $fb_id,
+			':category' => $category
+			)
+
+		$q->execute($task);
+		$q->setFetchMode(PDO::FETCH_ASSOC);
+
+		echo("<script>\n");
+		echo("\tvar heatmap2 = [];\n");
+		
+		while($r = $q->fetch()) {
+			echo("heatmap2.push(".$r['lat'].", ".$r['lng'].");\n");
+		}
+
+		echo("</script>\n");
+
+	} catch (PDOException $pe) {
+		// PC::db($pe);
+	}
+
+	$conn = null;
+}
 
 ?>

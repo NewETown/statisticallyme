@@ -5,6 +5,7 @@ ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'get_interest_categories.php';
+require_once 'map_queries.php';
 // require_once 'php-console/src/PhpConsole/__autoload.php';
 
 // Call debug from global PC class-helper (most short & easy way)
@@ -65,7 +66,7 @@ getFooterJS();
 ?>
 
 <script>
-var geocoder = new google.maps.Geocoder(), map, _center, heatmap, _heatmapData = [], query_data = [];
+var geocoder = new google.maps.Geocoder(), map, _center, heatmap, _heatmapData = [], query_data = [], person;
 
 function getUserLoc() {
 	if (navigator.geolocation)
@@ -111,6 +112,16 @@ $(document).ready(function() {
 	$('button').click(function() {
 		var context = $(this);
 		context.toggleClass('selected');
+		// var stringy = JSON.stringify(likes);
+		var context_name = context.text();
+		console.log("Fetching data for " + context_name);
+		$.post(
+			'map_queries.php',
+			{ fb_id: person.id, category: context_name },
+			function(resp) {
+				console.log("Map query response:");
+				console.log(resp);
+			}
 	});
 });
 
@@ -123,6 +134,33 @@ function interestClick(interest) {
 	var context = $('#'+interest);
 	context.toggleClass('selected');
 }
+
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : '407908079353620',
+		status     : true,
+		cookie     : true,
+		xfbml      : true
+	});
+
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		// Here we specify what we do with the response anytime this event occurs. 
+		if (response.status === 'connected') {
+			// The response object is returned with a status field that lets the app know the current
+			// login status of the person. In this case, we're handling the situation where they 
+			// have logged in to the app.
+			FB.api('/me', function(res) {
+				person = res;
+				// $('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
+			});
+		} else {
+			// The user isn't auth'd
+			console.log("Not auth'd");
+			window.location = 'index.php';
+		}
+	});
+}
+
 </script>
 
 <?php
