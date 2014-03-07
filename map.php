@@ -110,7 +110,7 @@ $(document).ready(function() {
 	getUserLoc();
 });
 
-$('button').click(function() {
+$('.category-row > button').click(function() {
 	var context = $(this);
 	context.toggleClass('selected');
 	// var stringy = JSON.stringify(likes);

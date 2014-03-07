@@ -18,7 +18,7 @@ function getFacebookCategories($conn) {
 			$count++;
 
 			if($count == 1)
-				echo("<div class=\"row\" style=\"padding-top:10px;\">\n\t<div class=\"col-md-offset-1 col-md-2 text-center\">");
+				echo("<div class=\"row\" class=\"category-row\" style=\"padding-top:10px;\">\n\t<div class=\"col-md-offset-1 col-md-2 text-center\">");
 			else
 				echo("\n\t<div class=\"col-md-2 text-center\">");
 
