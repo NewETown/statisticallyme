@@ -108,21 +108,21 @@ function initialize() {
 
 $(document).ready(function() {
 	getUserLoc();
+});
 
-	$('button').click(function() {
-		var context = $(this);
-		context.toggleClass('selected');
-		// var stringy = JSON.stringify(likes);
-		var context_name = context.text();
-		console.log("Fetching data for " + context_name);
-		$.post(
-			'map_queries.php',
-			{ fb_id: person.id, category: context_name },
-			function(resp) {
-				console.log("Map query response:");
-				console.log(resp);
-			}
-	});
+$('button').click(function() {
+	var context = $(this);
+	context.toggleClass('selected');
+	// var stringy = JSON.stringify(likes);
+	var context_name = context.text();
+	console.log("Fetching data for " + context_name);
+	$.post(
+		'map_queries.php',
+		{ fb_id: person.id, category: context_name },
+		function(resp) {
+			console.log("Map query response:");
+			console.log(resp);
+		}
 });
 
 function selectFacebook() {
