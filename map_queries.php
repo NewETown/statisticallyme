@@ -60,7 +60,7 @@ try {
 	$task = array(
 		':fb_id' => $fb_id,
 		':category' => $category
-		)
+		);
 
 	$q = $conn->prepare($sql);
 	$q->execute($task);
