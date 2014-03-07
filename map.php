@@ -122,7 +122,7 @@ $('button').click(function() {
 		function(resp) {
 			console.log("Map query response:");
 			console.log(resp);
-		}
+		});
 });
 
 function selectFacebook() {
