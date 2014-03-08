@@ -68,8 +68,8 @@ try {
 	// echo("<script>\n");
 	// echo("\tvar heatmap2 = [];\n");
 
-	$geolocation = new array();
-	
+	$geolocation = [];
+
 	while($r = $q->fetch()) {
 		array_push($geolocation, $r['lat']. ", " .$r['lng']);
 	}
