@@ -12,6 +12,7 @@ function getHeader() {
 	echo("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/custom.css\">\n");
 	echo("<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic' rel='stylesheet' type='text/css'>\n");
 	echo("<script src=\"http://code.jquery.com/jquery-latest.min.js\"></script>\n");
+	echo("<script type=\"text/javascript\" src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyAEwAlTq4PEFWq0H59t25BbSFgXrCmyJRU&libraries=visualization&sensor=true\"></script>");
 	echo("</head>\n");
 }
 
