@@ -71,7 +71,7 @@ try {
 	$geolocation = [];
 
 	while($r = $q->fetch()) {
-		array_push($geolocation, $r['lat']. ", " .$r['lng']);
+		array_push($geolocation, [$r['lat'], $r['lng']]);
 	}
 
 	// echo("</script>\n");

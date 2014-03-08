@@ -22,7 +22,7 @@ function getFacebookCategories($conn) {
 			else
 				echo("\n\t<div class=\"col-md-2 text-center\">");
 
-			echo("\n\t\t\t<button class=\"btn\">".$r['category']."</button>");
+			echo("\n\t\t\t<button class=\"btn category-button\">".$r['category']."</button>");
 
 			if($count == 5) {
 				$count = 0;

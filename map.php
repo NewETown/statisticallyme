@@ -5,7 +5,6 @@ ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 require_once 'dbconfig.php';
 require_once 'settings.php';
 require_once 'get_interest_categories.php';
-require_once 'map_queries.php';
 // require_once 'php-console/src/PhpConsole/__autoload.php';
 
 // Call debug from global PC class-helper (most short & easy way)
@@ -80,8 +79,6 @@ function getUserLoc() {
 
 function showPosition(position) {
 	console.log("Lat, lng " + position.coords.latitude + ", " + position.coords.longitude);
-	var thestring = position.coords.latitude + ", " + position.coords.longitude;
-	var bits = thestring.split(/,\s*/);
 	_center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 	_heatmapData.push(_center);
 	initialize();
@@ -110,7 +107,7 @@ $(document).ready(function() {
 	getUserLoc();
 });
 
-$('.category-row > button').click(function() {
+$('.category-button').click(function() {
 	var context = $(this);
 	context.toggleClass('selected');
 	// var stringy = JSON.stringify(likes);
@@ -122,8 +119,25 @@ $('.category-row > button').click(function() {
 		function(resp) {
 			console.log("Map query response:");
 			console.log(resp);
+			var _tt = $.parseJSON(resp);
+			var _points = [];
+			for(i = 0; i < _tt.length; i++) {
+				_points.push(new google.maps.LatLng(_tt[i][0], _tt[i][1]));
+				console.log(_tt[i]);
+			}
+			updateHeatmap(_points);
 		});
 });
+
+function updateHeatmap(data) {
+	var pointArray = new google.maps.MVCArray(data);
+
+	// heatmap = new google.maps.visualization.HeatmapLayer({
+	// 	data: pointArray
+	// 	});
+
+	heatmap.setData(pointArray);
+}
 
 function selectFacebook() {
 	$('#query-start').css('display', 'none');
