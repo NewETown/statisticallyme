@@ -47,15 +47,15 @@ function getFixedIndexPage() {
 
 function getDashboardPage() {
 	echo("<body>\n");
-	echo("\t\t<div id=\"fb-root\"></div>\n");
-	echo("\t\t<div class=\"blog-masthead\">\n");
-	echo("\t\t\t<div class=\"container\">\n");
-	echo("\t\t\t\t<nav class=\"blog-nav text-center\">\n");
-	echo("\t\t\t\t<a class=\"blog-nav-item\" href=\"main.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
-	echo("\t\t\t\t</nav>\n");
-	echo("\t\t\t</div>\n");
+	echo("\t<div id=\"fb-root\"></div>\n");
+	echo("\t<div class=\"blog-masthead\">\n");
+	echo("\t\t<div class=\"container\">\n");
+	echo("\t\t\t<nav class=\"blog-nav text-center\">\n");
+	echo("\t\t\t<a class=\"blog-nav-item\" href=\"main.php\"><h1 id=\"navHeader\">STATISTICALLY.ME</h1></a>\n");
+	echo("\t\t\t</nav>\n");
 	echo("\t\t</div>\n");
-	echo("\t\t<div class=\"container dashboard\">\n");
+	echo("\t</div>\n");
+	echo("\t<div class=\"container dashboard\">\n");
 }
 
 function getIndexJS() {
