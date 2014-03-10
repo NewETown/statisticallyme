@@ -95,9 +95,9 @@ function initialize() {
 
 	var pointArray = new google.maps.MVCArray(_heatmapData);
 
-	heatmap = new google.maps.visualization.HeatmapLayer({
-		data: pointArray
-		});
+	heatmap = new google.maps.visualization.HeatmapLayer({});
+		//data: pointArray
+		//});
 
 	heatmap.setMap(map);
 
@@ -131,10 +131,6 @@ $('.category-button').click(function() {
 
 function updateHeatmap(data) {
 	var pointArray = new google.maps.MVCArray(data);
-
-	// heatmap = new google.maps.visualization.HeatmapLayer({
-	// 	data: pointArray
-	// 	});
 
 	heatmap.setData(pointArray);
 }
