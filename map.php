@@ -79,7 +79,7 @@ function getUserLoc() {
 
 function showPosition(position) {
 	console.log("Lat, lng " + position.coords.latitude + ", " + position.coords.longitude);
-	_center = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	_center = new google.maps.LatLng(40.925, -98.3416667);// position.coords.latitude,position.coords.longitude);
 	_heatmapData.push(_center);
 	initialize();
 }
@@ -87,7 +87,7 @@ function showPosition(position) {
 function initialize() {
 	var mapOptions = {
 		center: _center,
-		zoom: 9,
+		zoom: 4,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
 
