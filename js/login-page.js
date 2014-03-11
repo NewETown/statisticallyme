@@ -25,7 +25,7 @@ window.fbAsyncInit = function() {
 							if(resp == "1")
 								window.location = "main.php";
 							else {
-								$('.greeting').html("<h2>You do not exist in the database</h2>" + "<p>" + resp + "</p><p>We will try to add you to the database again</p>");
+								$('.greeting').html("<h2>You do not exist in the database</h2>" + "<p>" + resp + "</p><p>We will try to add you to the database</p>");
 								login();
 							}
 
@@ -90,7 +90,7 @@ function login() {
 								if(resp == "1")
 									window.location = "main.php";
 								else
-									console.log(resp);
+									$('.greeting').append("<h2>It looks like both attempts to log in failed, please refresh this page and try again</h2><p>Sorry! This site is still in early alpha and will be experiencing errors.</p>");
 							});
 					}
 				);

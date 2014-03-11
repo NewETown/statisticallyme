@@ -63,7 +63,7 @@ for($i = 0; $i < $_arrSize; $i++) {
 		$q->execute($task);
 
 	} catch (PDOException $pe) {
-		echo($pe."\n");
+		// Do nothing for now
 	}
 
 	try {
@@ -81,35 +81,35 @@ for($i = 0; $i < $_arrSize; $i++) {
 		$q->execute($task);
 
 	} catch (PDOException $pe) {
-		echo($pe."\n");
+		// echo($pe."\n"); Again, the query works so do nothing
 	}
 }
 
-echo("Like mapping finished");
+echo("1");
 
-try {
+// try {
 
-	if ($count == 0)
-		die("count is 0");
+// 	if ($count == 0)
+// 		die("count is 0");
 
-	$sql = 'INSERT INTO likes_refresh_data(fb_id, likes_count, refresh_date, reminder_date)
-					VALUES(:fb_id, :count, :ref_date, :rem_date)';
+// 	$sql = 'INSERT INTO likes_refresh_data(fb_id, likes_count, refresh_date, reminder_date)
+// 					VALUES(:fb_id, :count, :ref_date, :rem_date)';
 
-	$task = array(
-				':fb_id' => $fb_id, 
-				':count' => $count,
-				':ref_date' => $rf_date,
-				':rem_date' => $rem_date
-				);
+// 	$task = array(
+// 				':fb_id' => $fb_id, 
+// 				':count' => $count,
+// 				':ref_date' => $rf_date,
+// 				':rem_date' => $rem_date
+// 				);
 
-	$q = $conn->prepare($sql);
+// 	$q = $conn->prepare($sql);
 
-	$q->execute($task);
+// 	$q->execute($task);
 
-} catch (PDOException $pe) {
-	// PC::db($pe);
-	echo($pe."\n");
-}
+// } catch (PDOException $pe) {
+// 	// PC::db($pe);
+// 	echo($pe."\n");
+// }
 
 $conn = null;
 

@@ -1,4 +1,4 @@
-var person;
+var person, lat = 0, lng = 0;
 
 window.fbAsyncInit = function() {
 	FB.init({
@@ -17,6 +17,17 @@ window.fbAsyncInit = function() {
 			FB.api('/me', function(res) {
 				person = res;
 				$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
+				$.post('check_exists.php',
+						{ fb_id: person.id },
+						function(resp) {
+							// POST callback
+							console.log("POST for connected status:");
+							if(resp != "1") {
+								// $('.greeting').html("<h2>You do not exist in the database</h2>" + "<p>" + resp + "</p><p>We will try to add you to the database</p>");
+								addUser();
+							}
+
+						});
 			});
 		} else {
 			// The user isn't auth'd
@@ -31,7 +42,8 @@ var page = 0;
 
 $('#getLikes').on('click', function() {
 	// Print out each "like"
-	console.log("Fetching likes");
+	$('#getLikes').css('display', 'none');
+	$('#fetching').text("Grabbing your likes, do not close this page");
 	if(likes.length == 0) {
 		FB.api('me/likes', function(res) {
 			iteratePages(res);
@@ -70,11 +82,52 @@ function storeLikes() {
 		'store_likes.php',
 		{ arr: stringy, fb_id: person.id, count: likes.length },
 		function(resp) {
-			console.log("Store Likes response:");
-			console.log(resp);
+			if(resp == "1")
+				$('#complete').text("All done! Check out the map");
 		}
 
 	);
+}
+
+function addUser() {
+	FB.api('/me', function(person) {
+		console.log("Calling FB.api/me");
+		var _city = null, _state = null, _country = null;
+		FB.api({
+				method: 'fql.query',
+				query: 'SELECT current_location FROM user WHERE uid='+person.id,
+				return_ssl_resources: 1
+			}, function (loc) {
+				_city = loc[0].current_location.city;
+				_state = loc[0].current_location.state;
+				_country = loc[0].current_location.country;
+				console.log("In FB.api callback, ajaxing info");
+				$.post('register.php',
+					{ fb_id: person.id, first_name: person.first_name, last_name: person.last_name, email: person.email, city: _city, state: _state, country: _country, latitude: lat, longitude: lng },
+					function(resp) {
+						if(resp != "1") {
+							$('#welcome').text('Looks like you are not in the database! Rerouting to home page');
+							FB.logout(function(response) {
+								// Person is now logged out
+								window.location = "index.php";
+							});
+						}
+					});
+			}
+		);
+	});
+}
+
+function getUserLoc() {
+	if (navigator.geolocation)
+		navigator.geolocation.getCurrentPosition(getPos, denyWarn);
+	else
+		$('.greeting').append("<h2>It looks like you're using an outdated browser, we recommend downloading the latest <a href=\"https://chrome.google.com\">Chrome</a> or <a href=\"http://www.mozilla.org/en-US/firefox/new/\"Firefox</a> browser</h2>");
+}
+
+function getPos(position) {
+	lat = position.coords.latitude;
+	lng = position.coords.longitude;
 }
 
 // Here we run a very simple test of the Graph API after login is successful. 

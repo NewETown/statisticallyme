@@ -4,7 +4,7 @@ ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 
 require_once 'dbconfig.php';
 require_once 'settings.php';
-require_once 'check_refresh.php';
+// require_once 'check_refresh.php';
 require_once 'fb-sdk/facebook.php';
 // require_once 'php-console/src/PhpConsole/__autoload.php';
 
@@ -56,13 +56,16 @@ getFixedIndexPage();
 			<h3 class="text-center">Take a quiz <h6>(coming soon)</h6></h3>
 			<h3 class="text-center">Update my info</h3>
 			<?php 
-				try {
-					checkLikeRefreshDate($conn, $user_id);
-				} catch(PDOException $pe) {
-					// PC::db($pe);
-					echo($pe);
-				}
+				// try {
+				// 	checkLikeRefreshDate($conn, $user_id);
+				// } catch(PDOException $pe) {
+				// 	// PC::db($pe);
+				// 	echo($pe);
+				// }
 			?>
+			<button id="getLikes" class="btn">Update Likes</button>
+			<h3 id="fetching" style="color: red;"></h3>
+			<h3 id="complete" style="color: green;"></h3>
 		</div>
 		<div class="col-md-4" style="height:300px;">
 			<h2 class="text-center">Share and Create</h2>
