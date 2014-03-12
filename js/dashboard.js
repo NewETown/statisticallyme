@@ -39,7 +39,6 @@ window.fbAsyncInit = function() {
 }
 
 var likes = [];
-var page = 0;
 
 $('#getLikes').on('click', function() {
 	// Print out each "like"
@@ -55,14 +54,13 @@ $('#getLikes').on('click', function() {
 });
 
 function iteratePages(res) {
-	page++;
+
+	console.log(res);
 
 	for(var i = 0; i < res.data.length; i++ ) {
 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
 		likes.push(res.data[i]);
 	}
-
-	console.log(res.paging.next);
 
 	next = res.paging.next;
 
