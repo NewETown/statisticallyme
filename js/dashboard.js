@@ -60,8 +60,6 @@ function iteratePages(res) {
 		likes.push(res.data[i]);
 	}
 
-	console.log(res.paging.next);
-
 	if(res.paging.next) {
 		// We have a next page
 		$.get(res.paging.next, iteratePages, 'json');
