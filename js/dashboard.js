@@ -54,10 +54,6 @@ $('#getLikes').on('click', function() {
 });
 
 function iteratePages(res) {
-	var _date = "",
-		_dYMD = "",
-		_dTime = "",
-		_dHolder;
 
 	for(var i = 0; i < res.data.length; i++ ) {
 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
@@ -69,7 +65,7 @@ function iteratePages(res) {
 
 		$.get(next, iteratePages, 'json');
 	} catch (err) {
-		console.log(err);
+		console.log(err.stack);
 		storeLikes();
 	}
 }
