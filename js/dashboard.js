@@ -55,20 +55,18 @@ $('#getLikes').on('click', function() {
 
 function iteratePages(res) {
 
-	console.log(res);
+	if(res.data.length > 0) {
+		for(var i = 0; i < res.data.length; i++ ) {
+			res.data[i].created_time = res.data[i].created_time.split("T")[0];
+			likes.push(res.data[i]);
+		}
 
-	for(var i = 0; i < res.data.length; i++ ) {
-		res.data[i].created_time = res.data[i].created_time.split("T")[0];
-		likes.push(res.data[i]);
-	}
+		next = res.paging.next;
 
-	next = res.paging.next;
-
-	if(next == undefined)
-		storeLikes();
-	else
 		$.get(next, iteratePages, 'json');
-
+	} else {
+		storeLikes();
+	}
 }
 
 function storeLikes() {
