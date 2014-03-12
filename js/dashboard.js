@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
 			// have logged in to the app.
 			FB.api('/me', function(res) {
 				person = res;
-				$('#welcome').text('Hello '+person.first_name+', what would you like to do today?');
+				$('#welcome').html('Hello '+person.first_name+', what would you like to do today?');
 				$.post('check_exists.php',
 						{ fb_id: person.id },
 						function(resp) {
@@ -39,12 +39,11 @@ window.fbAsyncInit = function() {
 }
 
 var likes = [];
-var page = 0;
 
 $('#getLikes').on('click', function() {
 	// Print out each "like"
 	$('#getLikes').css('display', 'none');
-	$('#fetching').text("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
+	$('#fetching').html("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
 	if(likes.length == 0) {
 		FB.api('me/likes', function(res) {
 			iteratePages(res);
@@ -55,7 +54,6 @@ $('#getLikes').on('click', function() {
 });
 
 function iteratePages(res) {
-	page++;
 	var _date = "",
 		_dYMD = "",
 		_dTime = "",
@@ -65,6 +63,8 @@ function iteratePages(res) {
 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
 		likes.push(res.data[i]);
 	}
+
+	console.log(res.paging.next);
 
 	next = res.paging.next;
 
@@ -85,7 +85,7 @@ function storeLikes() {
 		function(resp) {
 			if(resp == "1") {
 				$('#fetching').css('display', 'none');
-				$('#complete').text("All done! Check out the map");
+				$('#complete').html("All done! Check out the map");
 			}
 		}
 
