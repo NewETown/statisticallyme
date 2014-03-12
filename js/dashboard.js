@@ -67,8 +67,6 @@ function iteratePages(res) {
 	try {
 		next = res.paging.next;
 
-		console.log(next.data.length);
-
 		$.get(next, iteratePages, 'json');
 	} catch (err) {
 		console.log(err);
