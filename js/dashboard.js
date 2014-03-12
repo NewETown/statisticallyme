@@ -64,14 +64,16 @@ function iteratePages(res) {
 		likes.push(res.data[i]);
 	}
 
-	console.log(res.paging.next);
+	try {
+		next = res.paging.next;
 
-	next = res.paging.next;
+		console.log(next.data.length);
 
-	if(next == undefined)
+		$.get(next, iteratePages, 'json');
+	} catch (err) {
+		console.log(err);
 		storeLikes();
-
-	$.get(next, iteratePages, 'json');
+	}
 }
 
 function storeLikes() {

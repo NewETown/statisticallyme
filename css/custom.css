@@ -144,10 +144,10 @@ h1, h2, h3, h4, h5 {
  */
 
 .anim {
-  -webkit-animation-duration: .7s;
-     -moz-animation-duration: .7s;
-       -o-animation-duration: .7s;
-          animation-duration: .7s;
+  -webkit-animation-duration: 1s;
+     -moz-animation-duration: 1s;
+       -o-animation-duration: 1s;
+          animation-duration: 1s;
 }
 
 @-webkit-keyframes pulse {
@@ -186,22 +186,22 @@ h1, h2, h3, h4, h5 {
 }
 
 #s1 {
-  -webkit-animation-delay: 0s;
-     -moz-animation-delay: 0s;
-       -o-animation-delay: 0s;
-          animation-delay: 0s;
+  -webkit-animation-delay: 1s;
+     -moz-animation-delay: 1s;
+       -o-animation-delay: 1s;
+          animation-delay: 1s;
 }
 
 #s2 {
-  -webkit-animation-delay: .7s;
-     -moz-animation-delay: .7s;
-       -o-animation-delay: .7s;
-          animation-delay: .7s;
+  -webkit-animation-delay: 2s;
+     -moz-animation-delay: 2s;
+       -o-animation-delay: 2s;
+          animation-delay: 2s;
 }
 
 #s3 {
-  -webkit-animation-delay: 1.4s;
-     -moz-animation-delay: 1.4s;
-       -o-animation-delay: 1.4s;
-          animation-delay: 1.4s;
+  -webkit-animation-delay: 3s;
+     -moz-animation-delay: 3s;
+       -o-animation-delay: 3s;
+          animation-delay: 3s;
 }
