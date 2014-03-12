@@ -138,3 +138,70 @@ h1, h2, h3, h4, h5 {
     max-height: 1100px;
   }
 }
+
+/*
+ * ANIMATIONS
+ */
+
+.anim {
+  -webkit-animation-duration: .7s;
+     -moz-animation-duration: .7s;
+       -o-animation-duration: .7s;
+          animation-duration: .7s;
+}
+
+@-webkit-keyframes pulse {
+  0%   { opacity: 0; }
+  100% { opacity: 1; -webkit-animation-timing-function: ease-in; }
+}
+
+@-moz-keyframes pulse {
+  0%   { opacity: 0; }
+  100% { opacity: 1; -moz-animation-timing-function: ease-in; }
+}
+
+@-o-keyframes pulse {
+  0%   { opacity: 0; }
+  100% { opacity: 1; -o-animation-timing-function: ease-in; }
+}
+
+@-keyframes pulse {
+  0%   { opacity: 0; }
+  100% { opacity: 1; animation-timing-function: ease-in; }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+     -moz-animation-name: pulse;
+       -o-animation-name: pulse;
+          animation-name: pulse;
+  -webkit-animation-fill-mode: both;
+     -moz-animation-fill-mode: both;
+       -o-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-iteration-count: infinite;
+     -moz-animation-iteration-count: infinite;
+       -o-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+#s1 {
+  -webkit-animation-delay: 0s;
+     -moz-animation-delay: 0s;
+       -o-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+#s2 {
+  -webkit-animation-delay: .7s;
+     -moz-animation-delay: .7s;
+       -o-animation-delay: .7s;
+          animation-delay: .7s;
+}
+
+#s3 {
+  -webkit-animation-delay: 1.4s;
+     -moz-animation-delay: 1.4s;
+       -o-animation-delay: 1.4s;
+          animation-delay: 1.4s;
+}

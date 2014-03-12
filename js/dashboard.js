@@ -22,6 +22,7 @@ window.fbAsyncInit = function() {
 						function(resp) {
 							// POST callback
 							console.log("POST for connected status:");
+							console.log(resp);
 							if(resp != "1") {
 								// $('.greeting').html("<h2>You do not exist in the database</h2>" + "<p>" + resp + "</p><p>We will try to add you to the database</p>");
 								addUser();
@@ -43,7 +44,7 @@ var page = 0;
 $('#getLikes').on('click', function() {
 	// Print out each "like"
 	$('#getLikes').css('display', 'none');
-	$('#fetching').text("Grabbing your likes, do not close this page");
+	$('#fetching').text("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
 	if(likes.length == 0) {
 		FB.api('me/likes', function(res) {
 			iteratePages(res);
@@ -82,8 +83,10 @@ function storeLikes() {
 		'store_likes.php',
 		{ arr: stringy, fb_id: person.id, count: likes.length },
 		function(resp) {
-			if(resp == "1")
+			if(resp == "1") {
+				$('#fetching').css('display', 'none');
 				$('#complete').text("All done! Check out the map");
+			}
 		}
 
 	);
