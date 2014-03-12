@@ -60,14 +60,14 @@ function iteratePages(res) {
 		likes.push(res.data[i]);
 	}
 
-	try {
-		next = res.paging.next;
+	console.log(res.paging.next);
 
-		$.get(next, iteratePages, 'json');
-	} catch (err) {
-		console.log(err.stack);
+	next = res.paging.next;
+
+	if(next == undefined)
 		storeLikes();
-	}
+
+	$.get(next, iteratePages, 'json');
 }
 
 function storeLikes() {
