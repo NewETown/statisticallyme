@@ -55,17 +55,33 @@ $('#getLikes').on('click', function() {
 
 function iteratePages(res) {
 
-	if(res.data.length > 0) {
-		for(var i = 0; i < res.data.length; i++ ) {
+	// if(res.data.length > 0) {
+	// 	for(var i = 0; i < res.data.length; i++ ) {
+	// 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
+	// 		likes.push(res.data[i]);
+	// 	}
+
+	// 	next = res.paging.next;
+
+	// 	$.get(next, iteratePages, 'json');
+	// } else {
+	// 	storeLikes();
+	// }
+
+	try {
+		for(var i = 0; i < res.data.length; i++) {
 			res.data[i].created_time = res.data[i].created_time.split("T")[0];
 			likes.push(res.data[i]);
 		}
 
 		next = res.paging.next;
 
-		$.get(next, iteratePages, 'json');
-	} else {
-		storeLikes();
+		if (next == undefined)
+			storeLikes();
+		else
+			$.get(next, iteratePages, 'json');
+	} catch (err) {
+		console.log(err.stack);
 	}
 }
 
