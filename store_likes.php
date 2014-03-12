@@ -64,6 +64,7 @@ for($i = 0; $i < $_arrSize; $i++) {
 
 	} catch (PDOException $pe) {
 		// Do nothing for now
+		// echo("Interest error");
 	}
 
 	try {
@@ -81,7 +82,7 @@ for($i = 0; $i < $_arrSize; $i++) {
 		$q->execute($task);
 
 	} catch (PDOException $pe) {
-		// echo($pe."\n"); Again, the query works so do nothing
+		// echo($pe."\n"); // Again, the query works so do nothing
 	}
 }
 

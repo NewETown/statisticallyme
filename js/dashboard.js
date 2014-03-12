@@ -45,7 +45,7 @@ $('#getLikes').on('click', function() {
 	$('#getLikes').css('display', 'none');
 	$('#fetching').html("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
 	if(likes.length == 0) {
-		FB.api('me/likes', function(res) {
+		FB.api('me/likes?limit=1000', function(res) {
 			iteratePages(res);
 		}); 
 	} else {
@@ -55,36 +55,33 @@ $('#getLikes').on('click', function() {
 
 function iteratePages(res) {
 
-	if(res.data.length > 0) {
-		for(var i = 0; i < res.data.length; i++ ) {
-			res.data[i].created_time = res.data[i].created_time.split("T")[0];
-			likes.push(res.data[i]);
-		}
-
-		console.log(res.paging.next);
-
-		next = res.paging.next;
-
-		$.get(next, iteratePages, 'json');
-	} else {
-		storeLikes();
-	}
-
-	// try {
-	// 	for(var i = 0; i < res.data.length; i++) {
+	// if(res.data.length > 0) {
+	// 	for(var i = 0; i < res.data.length; i++ ) {
 	// 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
 	// 		likes.push(res.data[i]);
 	// 	}
 
+	// 	console.log(res.paging.next);
+
 	// 	next = res.paging.next;
 
-	// 	if (next == undefined)
-	// 		storeLikes();
-	// 	else
-	// 		$.get(next, iteratePages, 'json');
-	// } catch (err) {
-	// 	console.log(err.stack);
+	// 	$.get(next, iteratePages, 'json');
+	// } else {
+	// 	storeLikes();
 	// }
+
+	for(var i = 0; i < res.data.length; i++) {
+		res.data[i].created_time = res.data[i].created_time.split("T")[0];
+		likes.push(res.data[i]);
+	}
+
+	next = res.paging.next || undefined;
+
+	if (next == undefined)
+		storeLikes();
+	else
+		$.get(next, iteratePages, 'json');
+
 }
 
 function storeLikes() {
@@ -97,8 +94,12 @@ function storeLikes() {
 		{ arr: stringy, fb_id: person.id, count: likes.length },
 		function(resp) {
 			if(resp == "1") {
+				console.log("Storing likes finished");
 				$('#fetching').css('display', 'none');
 				$('#complete').html("All done! Check out the map");
+			} else {
+				console.log("Storing likes broke");
+				console.log(resp);
 			}
 		}
 

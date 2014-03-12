@@ -55,14 +55,6 @@ getFixedIndexPage();
 			<h2 class="text-center">Participate</h2>
 			<h3 class="text-center">Take a quiz <h6>(coming soon)</h6></h3>
 			<h3 class="text-center">Update my info</h3>
-			<?php 
-				// try {
-				// 	checkLikeRefreshDate($conn, $user_id);
-				// } catch(PDOException $pe) {
-				// 	// PC::db($pe);
-				// 	echo($pe);
-				// }
-			?>
 			<button id="getLikes" class="btn">Update Likes</button>
 			<h3 id="fetching" style="color: red;"></h3>
 			<h3 id="complete" style="color: green;"></h3>
