@@ -144,10 +144,10 @@ h1, h2, h3, h4, h5 {
  */
 
 .anim {
-  -webkit-animation-duration: 4s;
-     -moz-animation-duration: 4s;
-       -o-animation-duration: 4s;
-          animation-duration: 4s;
+  -webkit-animation-duration: 3s;
+     -moz-animation-duration: 3s;
+       -o-animation-duration: 3s;
+          animation-duration: 3s;
 }
 
 @-webkit-keyframes pulse {

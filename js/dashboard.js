@@ -60,11 +60,12 @@ function iteratePages(res) {
 		likes.push(res.data[i]);
 	}
 
-	if(res.paging.next) {
+	try {
 		// We have a next page
 		$.get(res.paging.next, iteratePages, 'json');
-	} else {
+	} catch (err) {
 		// Add likes to DB
+		console.log(err.stack);
 		storeLikes();
 	}
 
