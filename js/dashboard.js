@@ -45,7 +45,7 @@ $('#getLikes').on('click', function() {
 	$('#getLikes').css('display', 'none');
 	$('#fetching').html("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
 	if(likes.length == 0) {
-		FB.api('me/likes?limit=1000', function(res) {
+		FB.api('me/likes?limit=500', function(res) {
 			iteratePages(res);
 		}); 
 	} else {
