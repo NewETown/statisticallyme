@@ -62,12 +62,14 @@ function iteratePages(res) {
 
 	console.log(res.paging.next);
 
-	next = res.paging.next;
-
-	if(next == undefined)
+	if(res.paging.next) {
+		// We have a next page
+		$.get(res.paging.next, iteratePages, 'json');
+	} else {
+		// Add likes to DB
 		storeLikes();
+	}
 
-	$.get(next, iteratePages, 'json');
 }
 
 function storeLikes() {
