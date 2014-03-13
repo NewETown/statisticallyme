@@ -1,4 +1,4 @@
-var person, lat = 0, lng = 0;
+var person, lat = 0, lng = 0, accessToken;
 
 window.fbAsyncInit = function() {
 	FB.init({
@@ -14,6 +14,7 @@ window.fbAsyncInit = function() {
 			// The response object is returned with a status field that lets the app know the current
 			// login status of the person. In this case, we're handling the situation where they 
 			// have logged in to the app.
+			accessToken = response.authResponse.accessToken;
 			FB.api('/me', function(res) {
 				person = res;
 				$('#welcome').html('Hello '+person.first_name+', what would you like to do today?');
@@ -45,9 +46,11 @@ $('#getLikes').on('click', function() {
 	$('#getLikes').css('display', 'none');
 	$('#fetching').html("Grabbing your likes, do not close this page<span id=\"s1\" class=\"anim pulse\">.</span><span id=\"s2\" class=\"anim pulse\">.</span><span id=\"s3\" class=\"anim pulse\">.</span>");
 	if(likes.length == 0) {
-		FB.api('me/likes?limit=500', function(res) {
-			iteratePages(res);
-		}); 
+		FB.api('me/likes?limit=1000', 
+			{access_token: accessToken}, 
+			function(res) {
+				iteratePages(res);
+			}); 
 	} else {
 		storeLikes();
 	}
@@ -55,32 +58,35 @@ $('#getLikes').on('click', function() {
 
 function iteratePages(res) {
 
-	// if(res.data.length > 0) {
-	// 	for(var i = 0; i < res.data.length; i++ ) {
-	// 		res.data[i].created_time = res.data[i].created_time.split("T")[0];
-	// 		likes.push(res.data[i]);
-	// 	}
+	if(res.data.length > 0) {
+		for(var i = 0; i < res.data.length; i++ ) {
+			res.data[i].created_time = res.data[i].created_time.split("T")[0];
+			likes.push(res.data[i]);
+		}
 
-	// 	console.log(res.paging.next);
+		console.log(res.paging.cursors.after);
 
-	// 	next = res.paging.next;
-
-	// 	$.get(next, iteratePages, 'json');
-	// } else {
-	// 	storeLikes();
-	// }
-
-	for(var i = 0; i < res.data.length; i++) {
-		res.data[i].created_time = res.data[i].created_time.split("T")[0];
-		likes.push(res.data[i]);
+		// $.get("https://graph.facebook.com/me/likes?limit=500&after=" + res.paging.cursors.after, iteratePages, 'json');
+		FB.api('me/likes?limit=1000&after=' + res.paging.cursors.after, 
+			{access_token: accessToken}, 
+			function(res) {
+				iteratePages(res);
+			});
+	} else {
+		storeLikes();
 	}
 
-	next = res.paging.next || undefined;
+	// for(var i = 0; i < res.data.length; i++) {
+	// 	res.data[i].created_time = res.data[i].created_time.split("T")[0];
+	// 	likes.push(res.data[i]);
+	// }
 
-	if (next == undefined)
-		storeLikes();
-	else
-		$.get(next, iteratePages, 'json');
+	// next = res.paging.next || undefined;
+
+	// if (next == undefined)
+	// 	storeLikes();
+	// else
+	// 	$.get(next, iteratePages, 'json');
 
 }
 
