@@ -42,14 +42,18 @@ body {
 
 #explanation {
   position: absolute;
-  top: 260px;
-  left: 305px;
-  width: 140px;
+  top: 215px;
+  left: 295px;
+  width: 160px;
   text-align: center;
   color: #666;
   z-index: -1;
 }
 
 #percentage {
-  font-size: 2.5em;
+  font-size: 1.5em;
+}
+
+#share-source {
+  font-size: 1.5em;
 }
