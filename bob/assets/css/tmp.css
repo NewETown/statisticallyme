@@ -1,0 +1,23 @@
+.home-row {
+	border-radius: 0;
+	background-color: #eaefee;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	padding: 10px 10px 10px 10px;
+}
+
+.home-inline-list {
+	margin-left: 10px;
+}
+
+.inline-list > li > img {
+	max-width: 160px;
+}
+
+.share-row {
+	margin-top: 15px;
+}
+
+.share-row .description {
+	margin-top: 1rem;
+}
