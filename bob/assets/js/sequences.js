@@ -22,16 +22,24 @@ var colors = {
 // "celebrity": "#fd95b3"
 
 var color_rand = [
-                  "#5687d1",
-                  "#7b615c",
-                  "#de783b",
-                  "#6ab975",
-                  "#a173d1",
-                  "#bbbbbb",
-                  "#bfd041",
-                  "#60c1db",
-                  "#fd95b3"
-                  ];
+  "#5687d1",
+  "#7b615c",
+  "#de783b",
+  "#6ab975",
+  "#a173d1",
+  "#bbbbbb",
+  "#bfd041",
+  "#60c1db",
+  "#fd95b3"
+];
+
+var share_links = {
+  "elite daily": "shares/elitedaily.html",
+  "io9": "shares/io9.html",
+  "soundcloud": "shares/soundcloud.html",
+  "youtube": "shares/youtube.html",
+  "buzzfeed": "shares/buzzfeed.html"
+};
 
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0; 
@@ -65,9 +73,9 @@ d3.text("assets/csv/share-sequences.csv", function(text) {
 function createVisualization(json) {
 
   // Basic setup of page elements.
-  initializeBreadcrumbTrail();
-  drawLegend();
-  d3.select("#togglelegend").on("click", toggleLegend);
+  // initializeBreadcrumbTrail();
+  // drawLegend();
+  // d3.select("#togglelegend").on("click", toggleLegend);
 
   // Bounding circle underneath the sunburst, to make it easier to detect
   // when the mouse leaves the parent g.
@@ -89,6 +97,7 @@ function createVisualization(json) {
       .attr("fill-rule", "evenodd")
       .style("fill", function(d) { return pick_color(d); }) // colors[d.name]; })
       .style("opacity", 1)
+      .on("click", click)
       .on("mouseover", mouseover);
 
   // Add the mouseleave handler to the bounding circle.
@@ -105,14 +114,33 @@ function pick_color(d) {
   return color_rand[Math.floor((Math.random() * 9))];
 }
 
+function click(d) {
+  // var url = urlify(d.name.toLowerCase());
+  d3.select("#share-data")
+      .html(printAncestors(d));
+  // window.location = url;
+}
+
+function urlify(str) {
+  var url = str.replace(/[?:_']|_/g, "");
+  url = url.replace(/ /g, "-")
+  return "shares/"+url+".html";
+}
+
+function printAncestors(node) {
+  var ancestors = getAncestors(node);
+  var html = "";
+  ancestors.forEach(function(elem) {
+    html += "<p>"+elem.name+" makes up "+calculatePercentage(elem)+" of your shared content.</p>";
+    console.log(elem);
+  });
+  return html;
+}
+
 // Fade all but the current sequence, and show it in the breadcrumb trail.
 function mouseover(d) {
 
-  var percentage = (100 * d.value / totalSize).toPrecision(3);
-  var percentageString = percentage + "%";
-  if (percentage < 0.1) {
-    percentageString = "< 0.1%";
-  }
+  var percentageString = calculatePercentage(d);
 
   d3.select("#percentage")
       .text(percentageString);
@@ -124,7 +152,7 @@ function mouseover(d) {
       .text(d.name);
 
   var sequenceArray = getAncestors(d);
-  updateBreadcrumbs(sequenceArray, percentageString);
+  // updateBreadcrumbs(sequenceArray, percentageString);
 
   // Fade all the segments.
   d3.selectAll("path")
@@ -175,116 +203,13 @@ function getAncestors(node) {
   return path;
 }
 
-function initializeBreadcrumbTrail() {
-  // Add the svg area.
-  var trail = d3.select("#sequence").append("svg:svg")
-      .attr("width", "auto")
-      .attr("height", 50)
-      .attr("id", "trail");
-  // Add the label at the end, for the percentage.
-  trail.append("svg:text")
-    .attr("id", "endlabel")
-    .style("fill", "#000");
-}
-
-// Generate a string that describes the points of a breadcrumb polygon.
-function breadcrumbPoints(d, i) {
-  var points = [];
-  points.push("0,0");
-  points.push(b.w + ",0");
-  points.push(b.w + b.t + "," + (b.h / 2));
-  points.push(b.w + "," + b.h);
-  points.push("0," + b.h);
-  if (i > 0) { // Leftmost breadcrumb; don't include 6th vertex.
-    points.push(b.t + "," + (b.h / 2));
+function calculatePercentage(d) {
+  var percentage = (100 * d.value / totalSize).toPrecision(3);
+  var percentageString = percentage + "%";
+  if (percentage < 0.1) {
+    percentageString = "< 0.1%";
   }
-  return points.join(" ");
-}
-
-// Update the breadcrumb trail to show the current sequence and percentage.
-function updateBreadcrumbs(nodeArray, percentageString) {
-
-  // Data join; key function combines name and depth (= position in sequence).
-  var g = d3.select("#trail")
-      .selectAll("g")
-      .data(nodeArray, function(d) { return d.name + d.depth; });
-
-  // Add breadcrumb and label for entering nodes.
-  var entering = g.enter().append("svg:g");
-
-  entering.append("svg:polygon")
-      .attr("points", breadcrumbPoints)
-      .style("fill", function(d) { return colors[d.name]; });
-
-  entering.append("svg:text")
-      .attr("x", (b.w + b.t) / 2)
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.name; });
-
-  // Set position for entering and updating nodes.
-  g.attr("transform", function(d, i) {
-    return "translate(" + i * (b.w + b.s) + ", 0)";
-  });
-
-  // Remove exiting nodes.
-  g.exit().remove();
-
-  // Now move and update the percentage at the end.
-  d3.select("#trail").select("#endlabel")
-      .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
-      .attr("y", b.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(percentageString);
-
-  // Make the breadcrumb trail visible, if it's hidden.
-  d3.select("#trail")
-      .style("visibility", "");
-
-}
-
-function drawLegend() {
-
-  // Dimensions of legend item: width, height, spacing, radius of rounded rect.
-  var li = {
-    w: 75, h: 30, s: 3, r: 3
-  };
-
-  var legend = d3.select("#legend").append("svg:svg")
-      .attr("width", li.w)
-      .attr("height", d3.keys(colors).length * (li.h + li.s));
-
-  var g = legend.selectAll("g")
-      .data(d3.entries(colors))
-      .enter().append("svg:g")
-      .attr("transform", function(d, i) {
-              return "translate(0," + i * (li.h + li.s) + ")";
-           });
-
-  g.append("svg:rect")
-      .attr("rx", li.r)
-      .attr("ry", li.r)
-      .attr("width", li.w)
-      .attr("height", li.h)
-      .style("fill", function(d) { return d.value; });
-
-  g.append("svg:text")
-      .attr("x", li.w / 2)
-      .attr("y", li.h / 2)
-      .attr("dy", "0.35em")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.key; });
-}
-
-function toggleLegend() {
-  var legend = d3.select("#legend");
-  if (legend.style("visibility") == "hidden") {
-    legend.style("visibility", "");
-  } else {
-    legend.style("visibility", "hidden");
-  }
+  return percentageString;
 }
 
 // Take a 2-column CSV and transform it into a hierarchical structure suitable

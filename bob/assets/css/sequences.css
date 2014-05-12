@@ -8,25 +8,6 @@
   margin-top: 10px;
 }*/
 
-#main {
-  float: left;
-  width: 750px;
-}
-
-#sidebar {
-  float: right;
-  width: 100px;
-}
-
-#sequence {
-  width: auto; /*600px;*/
-  height: 70px;
-}
-
-#legend {
-  padding: 10px 0 0 3px;
-}
-
 #sequence text, #legend text {
   font-weight: 600;
   fill: #fff;
@@ -34,6 +15,7 @@
 
 #chart {
   position: relative;
+  margin-left: -20px;
 }
 
 #chart path {
@@ -47,7 +29,7 @@
   width: 160px;
   text-align: center;
   color: #666;
-  z-index: -1;
+  /*z-index: -1;*/
 }
 
 #percentage {

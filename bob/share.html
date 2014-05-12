@@ -12,6 +12,7 @@
     <link href="assets/css/sequences.css" type="text/css" rel="stylesheet" />
     <script src="assets/js/vendor/modernizr.js"></script>
     <script src="assets/js/vendor/jquery.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
     <meta content="authenticity_token" name="csrf-param" />
     <meta content="QVQJMG4WwF2bAc9/pQvPd0ZdmmxN3voEK/SD5LPGU4E=" name="csrf-token" />
     <!--[if lt IE 9]>
@@ -25,7 +26,7 @@
     <div class="inner-wrap">
       <div class="sidebar left-sidebar main-content-column" style="margin-top: 20px;">
       	<div class="sidebar-content">
-      		<h3>Statistically you, <a href="http://www.statistically.me/bob/">Bob</a></h3>
+      		<h3>Statistically you, <a href="index.html">Bob</a></h3>
           <ul>
           	<li>Link list</li>
           </ul>
@@ -34,16 +35,40 @@
       <div class="main-column main-content-column">
 
         <div class="row home-row" style="margin-top: 20px;">
+          <div class="row">
+            <div class="text-center small-12 columns">
+              <h3>Facebook Sharing Activity</h3>
+              <p id="prompt">
+                Facebook is Scroll over a segment to see what of content you've recently shared!
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="medium-12 columns">
+              <div id="chart">
+                <div id="explanation" style="visibility: hidden;">
+                  <span id="share-source"></span><br/>
+                  Makes up <span id="percentage"></span> of your shared content!<br/>
+                  <span id="share-source"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="row home-row" style="min-height: 200px;">
+        <div class="row home-row" style="height: auto;">
+          <h4>Share Data</h4>
+          <div class="row">
+            <div id="share-data" class="small-12 columns">
+            </div>
+          </div>
         </div>
 
       </div>
       <footer class="row">
       	<div class="small-8 small-offset-4 columns">
       		<ul class="inline-list">
-    				<li><a href="http://www.statistically.me/bob/">Home</a></li>
+    				<li><a href="index.html">Home</a></li>
             <!-- <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li> -->
       		</ul>
@@ -51,6 +76,12 @@
       </footer>
 
     </div> <!-- end inner-wrap -->
+
+    <script type="text/javascript" src="assets/js/sequences.js"></script>
+    <script type="text/javascript">
+      // Hack to make this example display correctly in an iframe on bl.ocks.org
+      d3.select(self.frameElement).style("height", "700px");
+    </script> 
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
