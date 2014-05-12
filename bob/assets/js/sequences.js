@@ -131,7 +131,7 @@ function printAncestors(node) {
   var ancestors = getAncestors(node);
   var html = "";
   ancestors.forEach(function(elem) {
-    html += "<p>"+elem.name+" makes up "+calculatePercentage(elem)+" of your shared content.</p>";
+    html += "<p>\""+elem.name+"\" makes up "+calculatePercentage(elem)+" of your shared content.</p>";
     console.log(elem);
   });
   return html;
