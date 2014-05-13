@@ -42,8 +42,8 @@ var share_links = {
 };
 
 var share_map = {
-  "elite daily":                                                           30,
-  "dating":                                                                24,
+  "elite daily":                                                           57,
+  "dating":                                                                34,
   "ladies":                                                                14,
   "the 7 types of guys youre bound to meet on tinder":                     3,
   "fearless females 4 tips for taking charge and making the first move":   2,
@@ -75,7 +75,7 @@ var share_map = {
   "wake me up extended mix":                                               1,
   "youngmoneydotcom":                                                      1,
   "believe me ft drake lil wayne":                                         1,
-  "youtube":                                                               47,
+  "youtube":                                                               103,
   "music":                                                                 52,
   "arctic monkeys":                                                        17,
   "r u mine":                                                              3,
@@ -172,23 +172,35 @@ function click(d) {
   // window.location = url;
 }
 
-function urlify(str) {
-  var url = str.replace(/[?:_']|_/g, "");
-  url = url.replace(/ /g, "-")
-  return "shares/"+url+".html";
+var return_url = "";
+
+function urlify(elem) {
+  var tmp = elem.name.replace(/[?:_'’(.)]|_/g, "").toLowerCase();
+  stripped = tmp.replace(/ /g, "-")
+  if (elem.depth == 1)
+    return_url = stripped + "/";
+  else if (elem.depth == 2)
+    return_url += stripped + "/";
+  else if (elem.depth == 3)
+    return_url += stripped + "/";
+  else if (elem.depth == 4)
+    return_url += stripped + ".html";
 }
 
 function printAncestors(node) {
   var ancestors = getAncestors(node);
   var html = "";
   ancestors.forEach(function(elem) {
-    var simplify = elem.name.replace(/[?:_']|_/g, "").toLowerCase();
-    console.log(simplify);
+    var simplify = elem.name.replace(/[?:_'’(.)]|_/g, "").toLowerCase();
+    urlify(elem);
     var net_count = share_map[simplify];
+    var ppl = "people";
+    if (net_count == 1)
+      ppl = "person";
     var percentage = calculatePercentage(elem);
     // html += "<p>\"" + elem.name + "\" makes up " + percentage + " of your shared content.</p>";
     html += "<div class=\"row\"><div class=\"med-12 columns\">"; // Base opening lines
-    html += "<p>It looks like <strong>" + net_count + "</strong> other people in your network have shared <strong>" + elem.name + "</strong>.</p>";
+    html += "<p>It looks like <strong>" + net_count + "</strong> " + ppl + " in your network have shared <a href=\""+return_url+"\">" + elem.name + "</a>.</p>";
     html += "</div></div>";
   });
   return html;
