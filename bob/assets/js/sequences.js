@@ -179,11 +179,9 @@ function urlify(elem) {
   stripped = tmp.replace(/ /g, "-")
   if (elem.depth == 1)
     return_url = stripped + "/";
-  else if (elem.depth == 2)
+  else if ("children" in elem)
     return_url += stripped + "/";
-  else if (elem.depth == 3)
-    return_url += stripped + "/";
-  else if (elem.depth == 4)
+  else
     return_url += stripped + ".html";
 }
 
@@ -192,6 +190,7 @@ function printAncestors(node) {
   var html = "";
   ancestors.forEach(function(elem) {
     var simplify = elem.name.replace(/[?:_'’(.)]|_/g, "").toLowerCase();
+    console.log(elem);
     urlify(elem);
     var net_count = share_map[simplify];
     var ppl = "people";
