@@ -35,11 +35,62 @@ var color_rand = [
 
 var share_links = {
   "elite daily": "shares/elitedaily.html",
-  "io9": "shares/io9.html",
-  "soundcloud": "shares/soundcloud.html",
-  "youtube": "shares/youtube.html",
-  "buzzfeed": "shares/buzzfeed.html"
+  "io9":         "shares/io9.html",
+  "soundcloud":  "shares/soundcloud.html",
+  "youtube":     "shares/youtube.html",
+  "buzzfeed":    "shares/buzzfeed.html"
 };
+
+var share_map = {
+  "elite daily":                                                           30,
+  "dating":                                                                24,
+  "ladies":                                                                14,
+  "the 7 types of guys youre bound to meet on tinder":                     3,
+  "fearless females 4 tips for taking charge and making the first move":   2,
+  "gentlemen":                                                             6,
+  "why you should date a girl with short hair":                            2,
+  "humor":                                                                 17,
+  "clips":                                                                 4,
+  "these five moms deserve some serious extra credit on mothers day":      3,
+  "its amazing how much binge watching and binge drinking have in common": 1,
+  "funny papers":                                                          2,
+  "youre doing it wrong the unofficial gen y etiquette guide to texting":  1,
+  "life":                                                                  12,
+  "generation y":                                                          13,
+  "7 things that are worth fighting for if you want a fulfilling life":    3,
+  "dear mom a letter of grattitude to all mothers this mothers day":       6,
+  "money":                                                                 9,
+  "startups":                                                              5,
+  "how one girl used her personal struggle to turn a penny into a startup":2,
+  "io9":                                                                   19,
+  "webcomics":                                                             3,
+  "see what your favorite webcomics look like animated":                   3,
+  "history":                                                               2,
+  "the evolution of special effects from 1878 to today in just 3 minutes": 1,
+  "biotechnology":                                                         3,
+  "the first lifeform capable of passing down a juiced up form of dna":    2,
+  "soundcloud":                                                            12,
+  "aviciiofficial":                                                        6,
+  "you make me diplo ookay remix":                                         2,
+  "wake me up extended mix":                                               1,
+  "youngmoneydotcom":                                                      1,
+  "believe me ft drake lil wayne":                                         1,
+  "youtube":                                                               47,
+  "music":                                                                 52,
+  "arctic monkeys":                                                        17,
+  "r u mine":                                                              3,
+  "do i wanna know":                                                       8,
+  "trailors":                                                              22,
+  "godzilla":                                                              16,
+  "official main trailor":                                                 11,
+  "nature has an order":                                                   4,
+  "buzzfeed":                                                              42,
+  "tech":                                                                  8,
+  "why twitters newest tweetstorm trend must be stopped":                  2,
+  "20 people at techcrunch disrupt on how to fix the tech industry":       4,
+  "celebrity":                                                             19,
+  "paris hiltons dog house is probably nicer than your own home":          3
+}
 
 // Total size of all segments; we set this later, after loading the data.
 var totalSize = 0; 
@@ -131,8 +182,14 @@ function printAncestors(node) {
   var ancestors = getAncestors(node);
   var html = "";
   ancestors.forEach(function(elem) {
-    html += "<p>\""+elem.name+"\" makes up "+calculatePercentage(elem)+" of your shared content.</p>";
-    console.log(elem);
+    var simplify = elem.name.replace(/[?:_']|_/g, "").toLowerCase();
+    console.log(simplify);
+    var net_count = share_map[simplify];
+    var percentage = calculatePercentage(elem);
+    // html += "<p>\"" + elem.name + "\" makes up " + percentage + " of your shared content.</p>";
+    html += "<div class=\"row\"><div class=\"med-12 columns\">"; // Base opening lines
+    html += "<p>It looks like <strong>" + net_count + "</strong> other people in your network have shared <strong>" + elem.name + "</strong>.</p>";
+    html += "</div></div>";
   });
   return html;
 }
