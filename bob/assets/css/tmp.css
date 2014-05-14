@@ -1,4 +1,4 @@
-.home-row {
+.content-row {
 	border-radius: 0;
 	background-color: #eaefee;
 	margin-top: 10px;
@@ -20,4 +20,8 @@
 
 .share-row .description {
 	margin-top: 1rem;
+}
+
+p {
+	margin-bottom: .5rem;
 }

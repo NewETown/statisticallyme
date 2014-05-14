@@ -11,6 +11,7 @@
     <link href="../../assets/css/tmp.css" media="screen" rel="stylesheet" />
     <script src="../../assets/js/vendor/modernizr.js"></script>
     <script src="../../assets/js/vendor/jquery.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEwAlTq4PEFWq0H59t25BbSFgXrCmyJRU&libraries=visualization&sensor=true"></script>
     <meta content="authenticity_token" name="csrf-param" />
     <meta content="QVQJMG4WwF2bAc9/pQvPd0ZdmmxN3voEK/SD5LPGU4E=" name="csrf-token" />
     <!--[if lt IE 9]>
@@ -30,16 +31,36 @@
       </div>
       <div class="main-column main-content-column">
 
-        <div class="row home-row" style="margin-top: 20px;">
+        <div class="row content-row" style="margin-top: 20px;">
           <div class="small-12 columns text-center">
             <img src="http://elitedaily.com/wp-content/themes/highsociety/images/devices/elite-icon-retina.png">
             <h3>Elite Daily | The Voice of Generation Y</h3>
             <h5>Elite Daily is the voice of generation y.</h5>
-            <h6><a href="https://facebook.com/elitedaily">Facebook</a> | <a href="https://twitter.com/elitedaily">Twitter</a> | <a href="http://elitedaily.com">web</a></h6>
+            <h6><a href="https://facebook.com/elitedaily">Facebook</a> | <a href="https://twitter.com/elitedaily">Twitter</a> | <a href="http://elitedaily.com">Web</a></h6>
           </div>
         </div>
 
-        <div class="row home-row" style="min-height: 200px;">
+        <div class="row content-row" style="min-height: 200px;">
+          <div class="row">
+            <div class="small-12 columns text-center">
+              <h4>Today's Share Map</h4>
+            </div>
+          </div>
+          <div id="map" class="medium-12 columns" style="height: 450px;"></div>
+          <div class="row">
+            <div class="small-12 columns">
+              <p>Elite Daily is shared across the world every day. Each dot on the map represents an individual who has shared content from Elite Daily today!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row content-row">
+          <div class="row">
+            <div class="small-12 columns text-center">
+              <h4>Content You've Shared</h4>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -54,6 +75,69 @@
       </footer>
 
     </div> <!-- end inner-wrap -->
+
+    <script>
+    var geocoder = new google.maps.Geocoder(), map, _center, heatmap, _heatmapData = [], query_data = [], person;
+
+    function showPosition() {
+      _center = new google.maps.LatLng(40.925, -98.3416667); // position.coords.latitude,position.coords.longitude);
+      _heatmapData.push(_center);
+      initialize();
+    }
+
+    function initialize() {
+      var mapOptions = {
+        center: _center,
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+      };
+
+      map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      var pointArray = new google.maps.MVCArray(_heatmapData);
+
+      heatmap = new google.maps.visualization.HeatmapLayer({});
+
+      heatmap.setMap(map);
+
+      $.ajax({
+        type: "GET",
+        url: "../../assets/csv/elite-daily-heatmap.csv",
+        dataType: "text",
+        success: function(data) {console.log("CSV Capture success"); processData(data);}
+      });
+
+    }
+
+    // var _tt = $.parseJSON(resp);
+    // var _points = [];
+    // for(i = 0; i < _tt.length; i++) {
+    //   _points.push(new google.maps.LatLng(_tt[i][0], _tt[i][1]));
+    //   console.log(_tt[i]);
+    // }
+    // updateHeatmap(_points);
+
+    function updateHeatmap(data) {
+      var pointArray = new google.maps.MVCArray(data);
+      heatmap.setData(pointArray);
+    }
+
+    $(document).ready(function() {
+      showPosition();
+    });
+
+    function processData(allText) {
+      var allTextLines = allText.split(/\r\n|\n/);
+      var coords = [];
+
+      for (var i=0; i < allTextLines.length; i++) {
+        var data = allTextLines[i].split(',');
+        if (data[0] != "" && data[1] != "")
+          coords.push(new google.maps.LatLng(data[0], data[1]));
+      }
+      updateHeatmap(coords);
+    }
+    </script>
 
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
